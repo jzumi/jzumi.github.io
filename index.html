@@ -1,349 +1,621 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jenna Tumlos — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <title>Jenna Tumlos</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    :root {
+      --yellow: #FFF8DC;
+      --yellow-dark: #F5EDCA;
+      --yellow-accent: #E8D9A0;
+      --blue: #DCEEFB;
+      --blue-dark: #C9E1F5;
+      --blue-accent: #A3C8E8;
+      --purple: #E8DCED;
+      --purple-dark: #D9C9E2;
+      --purple-accent: #C0A8D0;
+      --indigo: #D5D5F0;
+      --indigo-dark: #C2C2E6;
+      --indigo-accent: #A5A5D4;
+      --pink: #FCE4EC;
+      --pink-dark: #F3CFDA;
+      --pink-accent: #E8A8BD;
+      --text-primary: #2D2A32;
+      --text-secondary: #5C5666;
+      --text-muted: #8A8394;
+      --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
+    }
 
+    html { scroll-behavior: smooth; }
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #EDE8DF;
+    }
 
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.30;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
 
-  <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    /* ── Layout shell ── */
+    .portfolio-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      position: relative;
+    }
 
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    /* ── Header ── */
+    .site-header {
+      text-align: center;
+      margin-bottom: 14px;
+      animation: fadeDown 0.6s ease-out both;
+    }
+    .site-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+    .site-header .subtitle {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
 
-  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+    /* ── Tab Bar ── */
+    .tab-bar {
+      display: flex;
+      gap: 0;
+      align-items: flex-end;
+      padding: 0 4px;
+      position: relative;
+      z-index: 10;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      animation: fadeDown 0.6s 0.15s ease-out both;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
 
-  <link rel="stylesheet" href="css/aos.css">
+    .tab-btn {
+      font-family: 'Caveat', cursive;
+      font-weight: 600;
+      font-size: clamp(0.88rem, 2vw, 1.1rem);
+      padding: 11px 24px 13px;
+      border: 2px solid transparent;
+      border-bottom: none;
+      border-radius: 14px 14px 0 0;
+      cursor: pointer;
+      position: relative;
+      bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--text-secondary);
+      background: transparent;
+      flex-shrink: 0;
+    }
+    .tab-btn:hover:not(.active) {
+      transform: translateY(-3px);
+      opacity: 0.85;
+    }
+    .tab-btn.active {
+      z-index: 12;
+      bottom: -2px;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .tab-btn[data-tab="home"]    { --tab-bg: var(--yellow); --tab-border: var(--yellow-accent); }
+    .tab-btn[data-tab="coding"]  { --tab-bg: var(--blue);   --tab-border: var(--blue-accent);   }
+    .tab-btn[data-tab="art"]     { --tab-bg: var(--purple); --tab-border: var(--purple-accent); }
+    .tab-btn[data-tab="events"]  { --tab-bg: var(--indigo); --tab-border: var(--indigo-accent); }
+    .tab-btn[data-tab="contact"] { --tab-bg: var(--pink);   --tab-border: var(--pink-accent);   }
 
-  <link rel="stylesheet" href="css/style.css">
+    .tab-btn.active {
+      background: var(--tab-bg);
+      border-color: var(--tab-border);
+    }
 
+    /* ── Folder Body ── */
+    .folder-body {
+      background: var(--yellow);
+      border: 2px solid var(--yellow-accent);
+      border-radius: 0 16px 16px 16px;
+      min-height: 520px;
+      position: relative;
+      z-index: 5;
+      box-shadow: var(--shadow-soft), 0 8px 30px rgba(0,0,0,0.04);
+      transition: background 0.45s ease, border-color 0.45s ease;
+    }
+
+    /* Decorative stacked edges */
+    .folder-stack { position: relative; z-index: 1; }
+    .folder-stack::before,
+    .folder-stack::after {
+      content: '';
+      display: block;
+      height: 8px;
+      border-radius: 0 0 14px 14px;
+    }
+    .folder-stack::before { background: rgba(0,0,0,0.025); margin: 0 18px; }
+    .folder-stack::after  { background: rgba(0,0,0,0.015); margin: 0 32px; }
+
+    /* ── Pages ── */
+    .tab-page {
+      display: none;
+      padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 52px);
+      animation: fadeIn 0.4s ease-out both;
+    }
+    .tab-page.active { display: block; }
+
+    /* ── Typography ── */
+    .section-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+    .section-subheading {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .label {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    /* ── About Grid ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    }
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(0,0,0,0.06);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .about-text p {
+      font-size: 0.98rem;
+      line-height: 1.72;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+    .leadership-item {
+      background: rgba(255,255,255,0.5);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--yellow-accent);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+    .fun-fact-area {
+      margin-top: 28px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .fun-fact-area p { flex: 1 1 100%; }
+    .dance-photo {
+      height: 220px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 3px solid rgba(0,0,0,0.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+    .dance-photo:hover { transform: rotate(-2deg) scale(1.03); }
+
+    /* ── Project Cards ── */
+    .project-card {
+      background: rgba(255,255,255,0.45);
+      border-radius: 14px;
+      padding: 28px 30px;
+      margin-bottom: 28px;
+      border: 1.5px solid rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .project-card-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .project-card-grid { grid-template-columns: 1fr; }
+    }
+    .project-img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid rgba(0,0,0,0.04);
+    }
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+    }
+    .project-card .semester {
+      font-family: 'Caveat', cursive;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+    .project-card .detail-label {
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 14px 0 4px;
+    }
+    .project-card .detail-label:first-of-type { margin-top: 0; }
+    .project-card p {
+      font-size: 0.93rem;
+      line-height: 1.68;
+      color: var(--text-secondary);
+    }
+
+    /* ── Placeholder ── */
+    .placeholder-page {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .placeholder-page .icon {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+      display: block;
+      opacity: 0.45;
+    }
+    .placeholder-page h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .placeholder-page p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.5);
+      border-radius: 14px;
+      padding: 30px 24px;
+      text-align: center;
+      border: 1.5px solid rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    .contact-card:hover { transform: translateY(-3px); }
+    .contact-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .contact-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+    .contact-card a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      border-bottom: 1px dashed var(--pink-accent);
+      transition: color 0.2s;
+    }
+    .contact-card a:hover { color: var(--text-primary); }
+    .contact-card span.val {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: 32px 20px 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      animation: fadeDown 0.6s 0.3s ease-out both;
+    }
+    .site-footer a { color: var(--text-secondary); }
+
+    /* ── Animations ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes stagger1 {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .stagger { animation: stagger1 0.5s ease-out both; }
+    .stagger:nth-child(1) { animation-delay: 0.05s; }
+    .stagger:nth-child(2) { animation-delay: 0.15s; }
+    .stagger:nth-child(3) { animation-delay: 0.25s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 500px) {
+      .tab-btn { padding: 8px 14px 10px; font-size: 0.82rem; }
+      .folder-body { border-radius: 0 12px 12px 12px; }
+    }
+  </style>
 </head>
+<body>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<div class="portfolio-shell">
 
+  <!-- Header -->
+  <header class="site-header">
+    <h1>Jenna Tumlos</h1>
+    <p class="subtitle">engineer · leader · creative</p>
+  </header>
 
-  <div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
+  <!-- Tab Bar -->
+  <nav class="tab-bar" role="tablist">
+    <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">Home &amp; About</button>
+    <button class="tab-btn" data-tab="coding" role="tab" aria-selected="false">Coding Projects</button>
+    <button class="tab-btn" data-tab="art" role="tab" aria-selected="false">Visual Art</button>
+    <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Event Planning</button>
+    <button class="tab-btn" data-tab="contact" role="tab" aria-selected="false">Contact Me</button>
+  </nav>
 
+  <!-- Folder Body -->
+  <div class="folder-stack">
+    <div class="folder-body" id="folderBody">
 
-  <div class="site-wrap">
+      <!-- ═══ HOME & ABOUT ═══ -->
+      <div class="tab-page active" id="page-home">
+        <h2 class="section-heading">Hello!</h2>
+        <p class="section-subheading">a little bit about me</p>
 
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div>
-
-
-    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-
-      <div class="container">
-        <div class="row align-items-center">
-
-          <div class="col-6 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="#" class="h2 mb-0">Jenna Tumlos</a></h1>
-          </div>
-
-          <div class="col-12 col-md-10 d-none d-xl-block">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-
-              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="#about-section" class="nav-link">About</a></li>
-                <li><a href="#projects-section" class="nav-link">Projects</a></li>
-                <li><a href="#contact-section" class="nav-link">Contact</a></li>
-              </ul>
-            </nav>
-          </div>
-
-
-          <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#"
-              class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a></div>
-
-        </div>
-      </div>
-
-    </header>
-
-
-
-
-    <div class="site-section cta-big-image border-bottom" id="about-section">
-      <div class="container" style="padding-top: 30px">
-        <div class="row">
-
-          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-            <img src="images/linkedin.JPG" alt="Profile Picture" width="200">
-          </div>
-
-          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="mb-4">
-              <p>About:</p>
-              </p>
-              Hello! My name is Jenna and I am a Junior at the University of San Diego's Shiley Marcos School of Engineering. 
-              I am a strong believer in using technology as a catalyst for positive change and actively striving to be at 
+        <div class="about-grid">
+          <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="profile-photo">
+          <div class="about-text">
+            <p>
+              My name is Jenna and I am a Junior at the University of San Diego's Shiley Marcos School of Engineering.
+              I am a strong believer in using technology as a catalyst for positive change and actively striving to be at
               the forefront of digital innovation.
-              </p>
-              <p>Leadership:</p>
-              <p>
-                Current Co-President of the Society of Asian Scientists and Engineers (SASE) - USD Chapter
-                </p>
-              <p>
-                Current President of the Association for Computing Machinery (ACM) - USD Chapter
-              </p>
-              <p>Fun Fact:</p>
-              <p>
-                I've participated in Filipino cultural dance performances since I was 6 years old!
-                <img src="images/dance2.jpg" alt="Hawaiian Dance: Auana" height="400">
-                <img src="images/dance1.jpg" alt="Filipino Cultural Dance: Pandanggo sa Ilaw" height="400">
-              </p>
+            </p>
+
+            <p class="label">Leadership</p>
+            <div class="leadership-item">
+              Co-President — Society of Asian Scientists and Engineers (SASE), USD Chapter
+            </div>
+            <div class="leadership-item">
+              President — Association for Computing Machinery (ACM), USD Chapter
             </div>
 
-
-
+            <div class="fun-fact-area">
+              <p class="label" style="margin-bottom:2px;">Fun Fact</p>
+              <p>I've participated in Filipino cultural dance performances since I was 6 years old!</p>
+              <img src="images/dance2.jpg" alt="Hawaiian Dance: Auana" class="dance-photo">
+              <img src="images/dance1.jpg" alt="Filipino Cultural Dance: Pandanggo sa Ilaw" class="dance-photo">
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
+      <!-- ═══ CODING PROJECTS ═══ -->
+      <div class="tab-page" id="page-coding">
+        <h2 class="section-heading">Coding Projects</h2>
+        <p class="section-subheading">object-oriented design &amp; beyond</p>
 
-
-    <section class="site-section border-bottom" id="projects-section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-8 text-center">
-            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">Projects</h2>
+        <div class="project-card stagger">
+          <div class="project-card-grid">
+            <img src="images/timely_demo.png" alt="Demo of Timely App" class="project-img">
+            <div>
+              <h3>Timely App</h3>
+              <p class="semester">Spring 2025 · Object Oriented Programming</p>
+              <p class="detail-label">Description</p>
+              <p>
+                Timely is an interactive app for organizing events and tasks in a planner. It provides a simple calendar view
+                for all-day events and time blocks, plus a unique progress chart that visualizes your task completion in real time.
+              </p>
+              <p class="detail-label">Motivation</p>
+              <p>
+                Time management is a skill I've been working on to balance personal and school life. After trying multiple planners,
+                I couldn't find one with everything I needed — so I built my own.
+              </p>
+              <p class="detail-label">Design &amp; Implementation</p>
+              <p>
+                The back-end follows the MVC pattern with Observer and Facade patterns. I implemented the To Do List and Progress Chart
+                components, and did a full code cleanup to ensure all lines were relevant. Building interactive UI with MVC was a
+                rewarding learning experience.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div class="row">
-
-          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-            <img src="images/bday_paradox.png" alt="Birthday Paradox Graph" width="300">
+        <div class="project-card stagger">
+          <div class="project-card-grid">
+            <img src="images/elevator.jpeg" alt="Elevator Simulator" class="project-img">
+            <div>
+              <h3>Elevator Simulator</h3>
+              <p class="semester">Spring 2025 · Object Oriented Programming</p>
+              <p class="detail-label">Description</p>
+              <p>
+                A simulator with different elevator types that service a building, each with unique behaviors and a scheduler
+                to determine which elevator answers each call.
+              </p>
+              <p class="detail-label">Motivation</p>
+              <p>
+                Develop a program using Test Driven Development and Object Oriented Principles.
+              </p>
+              <p class="detail-label">Design &amp; Implementation</p>
+              <p>
+                We used interfaces for Elevators and Schedulers for uniformity. I implemented the Express and Freight elevator
+                classes, the Complex Scheduler, and contributed to the Simulator class — all with comprehensive tests.
+              </p>
+            </div>
           </div>
+        </div>
 
-          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="mb-4">
+        <div class="project-card stagger">
+          <div class="project-card-grid">
+            <img src="images/bday_paradox.png" alt="Birthday Paradox Graph" class="project-img">
+            <div>
               <h3>Birthday Paradox</h3>
-              <p>Spring 2025 - Object Oriented Programming</p>
-              <p>Description</p>
+              <p class="semester">Spring 2025 · Object Oriented Programming</p>
+              <p class="detail-label">Description</p>
               <p>
                 Runs the "Birthday Paradox" experiment, calculating the probability of at least two people in the same
                 room sharing a birthday.
               </p>
-              <p>Motivation</p>
+              <p class="detail-label">Motivation</p>
               <p>
                 Focus on writing clean code and efficient tests using Mockito.
-                </p>
-              <p>Project design</p>
-              <p>
-                The Simulation class runs the entire experiment of 5 to 100 people in Trial groups incremented by 5. The
-                Birthday class deals with
-                the random creation for birthdays for each person in the trial. The Trial class creates and runs the
-                trial of a certain amount of
-                people in a group. The Experiment class runs each trial once, tracking how many trials have found the
-                same birthdays.
               </p>
-              <p>Implementation</p>
+              <p class="detail-label">Design &amp; Implementation</p>
               <p>
-                I implemented the Simulation, Trial, and Experiment classes as well as the testing for Trial and Experiment.
+                The Simulation class runs groups of 5 to 100 people. I implemented the Simulation, Trial, and Experiment classes
+                along with their tests.
               </p>
             </div>
           </div>
         </div>
-
-        <div class="row">
-
-          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-            <img src="images/elevator.jpeg" alt="Elevator from the show 'Severance'" width="300">
-          </div>
-
-          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="mb-4">
-              <h3>Elevator Simulator</h3>
-              <p>Spring 2025 - Object Oriented Programming</p>
-              <p>Description:</p>
-              <p>
-                In this elevator simulator, there are different types of elevators that service the building. Each
-                elevator has different behaviors that it follows and a scheduler that helps determine
-                what elevator goes to service a call. To simplify the task, each call will tell you what floor it is coming from and what
-                floor it would
-                like to go to.
-              </p>
-              <p>Motivation</p>
-              <p>
-                Develop a program using a Test Driven Development approach and following Object Oriented Principles.
-              </p>
-              <p>Project design</p>
-              <p>
-                While designing, we created interfaces for similar objects, like all Elevators and
-                Schedulers, to make
-                them uniform in how they run and to stay organized. Helper methods were added to split
-                the responsibility of larger methods to ensure it follows the Single Responsibility Principle.
-              </p>
-              <p>Implementation</p>
-              <p>
-                I implemented the Express and Freight elevator classes and the Complex Scheduler as well as their testing.
-                I also contributed to creating the Simulator class.
-                </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-            <img src="images/timely_demo.png" alt="Demo Image of Timely App" width="300">
-          </div>
-
-          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="mb-4">
-              <h3>Timely App</h3>
-              <p>Spring 2025 - Object Oriented Programming</p>
-              <p>Description</p>
-              <p>
-                Timely is an interactive app aimed at helping you organize events and tasks in a planner. Timely
-                provides users with an
-                interactive and simple calendar view that lets them keep track of events, whether they are considered
-                all-day events or
-                time blocks. At the same time, the unique design of Timely allows the user to keep track of various
-                tasks throughout the
-                day, and as they work towards completing these tasks, they are met with a visually reactive progress
-                chart. The progress
-                chart is a unique feature that keeps you on top of all your work and visualizes your successes through
-                our application.
-              </p>
-              <p>Motivation</p>
-              <p>
-                Time management is a skill I have been working on improving for a long time to balance my personal and
-                school life.
-                Throughout my college career I have tried multiple planners, phyical and online versions, and I haven't
-                come across an
-                application that has all the features I am looking for. This sparked the idea of creating my own planner
-                that includes
-                everything in one app that I can use daily. This was a project I was able to apply everything I learned
-                to improve my writing skills.
-              </p>
-              <p>Project design</p>
-              <p>
-                The back-end followed the Model View Controller (MVC) Design Pattern including the Observer and
-                Facade Patterns so the entire planner
-                updates orderly and automatically across the different components. The Planner view encompasses all
-                views of the
-                Calendar where one can add different events either All-Day or a Time Block, To Do List which is a
-                running list of
-                personal or school tasks notably different by the colors of the text, and Progress Chart which tracks
-                the percentage of
-                how many tasks have been completed. We used inheritance properties of interfaces and abstract classes to
-                implement
-                concrete objects that the different components are based off of.
-              </p>
-              <p>
-                Implementation
-              </p>
-              <p>
-                My partner and I aimed to follow Object-Oriented principles and we learned in class. Because
-                we are a two-person team, we wanted to ensure we had a workload that was feasible to complete by the due
-                date. Between the
-                two of us, we divided the work by components. I implemented the To Do List and Progress Chart and
-                brought it altogether for
-                a code clean up ensuring all lines of code were used and relevant in the program. Building UI and using
-                the MVC pattern to
-                build an interactive application was new to me and I enjoyed seeing it come into fruition.
-              </p>
-
-            </div>
-          </div>
-        </div>
-
       </div>
-    </section>
 
-
-    <section class="site-section" id="contact-section" data-aos="fade">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-12 text-center">
-            <h2 class="section-title mb-3">Contact Me</h2>
-          </div>
+      <!-- ═══ VISUAL ART ═══ -->
+      <div class="tab-page" id="page-art">
+        <div class="placeholder-page">
+          <span class="icon">🎨</span>
+          <h2>Visual Art Projects</h2>
+          <p>Coming soon — this folder is being filled with illustrations, designs, and creative experiments. Check back shortly!</p>
         </div>
-        <div class="row mb-5 text-center">
-
-
-
-
-
-          <div class="col-md-12 text-center">
-            <p class="mb-0">
-              <span class="icon-mail_outline d-block h4 text-primary"></span>
-              <span>jtumlos@sandiego.edu</span>
-            </p>
-          </div>
-
-          <div class="col-md-12 text-center">
-            <p class="mb-0">
-              <span class="icon-graduation-cap d-block h4 text-primary"></span>
-              <a href="https://www.linkedin.com/in/jenna-therese-tumlos/">LinkedIn</a>
-            </p>
-          </div>
-        </div>
-
       </div>
-    </section>
 
-
-    <footer class="site-footer">
-      <div class="container">
-
-        <div class="col-md-12 text-center">
-          <p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;
-            <script>document.write(new Date().getFullYear());</script> All rights reserved | This website builds on a
-            template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
-
+      <!-- ═══ EVENT PLANNING ═══ -->
+      <div class="tab-page" id="page-events">
+        <div class="placeholder-page">
+          <span class="icon">📋</span>
+          <h2>Event Planning Projects</h2>
+          <p>Coming soon — details on events organized through SASE, ACM, and beyond will appear here.</p>
         </div>
-
-
       </div>
-    </footer>
 
-  </div> <!-- .site-wrap -->
+      <!-- ═══ CONTACT ═══ -->
+      <div class="tab-page" id="page-contact">
+        <h2 class="section-heading" style="text-align:center;">Get in Touch</h2>
+        <p class="section-subheading" style="text-align:center;">I'd love to hear from you</p>
 
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.countdown.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.fancybox.min.js"></script>
-  <script src="js/jquery.sticky.js"></script>
-  <script src="js/isotope.pkgd.min.js"></script>
-  <script src="js/collapsable.js"></script>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <span class="contact-icon">✉️</span>
+            <h3>Email</h3>
+            <span class="val">jtumlos@sandiego.edu</span>
+          </div>
+          <div class="contact-card">
+            <span class="contact-icon">💼</span>
+            <h3>LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener">jenna-therese-tumlos</a>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </div>
 
-  <script src="js/main.js"></script>
+  <footer class="site-footer">
+    <p>
+      Copyright &copy; <script>document.write(new Date().getFullYear());</script> Jenna Tumlos. All rights reserved
+      | Built on a template by <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const pages = document.querySelectorAll('.tab-page');
+  const folderBody = document.getElementById('folderBody');
+
+  const colorMap = {
+    home:    { bg: 'var(--yellow)',  border: 'var(--yellow-accent)'  },
+    coding:  { bg: 'var(--blue)',    border: 'var(--blue-accent)'    },
+    art:     { bg: 'var(--purple)',  border: 'var(--purple-accent)'  },
+    events:  { bg: 'var(--indigo)',  border: 'var(--indigo-accent)'  },
+    contact: { bg: 'var(--pink)',    border: 'var(--pink-accent)'    },
+  };
+
+  function updateFolderRadius(tabEl) {
+    const idx = Array.from(tabBtns).indexOf(tabEl);
+    folderBody.style.borderRadius = idx === 0
+      ? '0 16px 16px 16px'
+      : '16px 16px 16px 16px';
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+
+      tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + tab).classList.add('active');
+
+      const colors = colorMap[tab];
+      folderBody.style.background = colors.bg;
+      folderBody.style.borderColor = colors.border;
+
+      updateFolderRadius(btn);
+
+      // Re-trigger stagger on project cards
+      const cards = document.querySelectorAll('#page-' + tab + ' .stagger');
+      cards.forEach(c => { c.style.animation = 'none'; void c.offsetHeight; c.style.animation = ''; });
+    });
+  });
+</script>
 
 </body>
-
 </html>
