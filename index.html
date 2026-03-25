@@ -4,14 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jenna Tumlos — Portfolio</title>
-  <!--
-    FONT NOTE: Radnika Next is a premium font (not on Google Fonts).
-    If you own it, host the .woff2 files in a /fonts folder and uncomment:
-    @font-face { font-family:'Radnika Next'; src:url('fonts/RadnikaNext-Regular.woff2') format('woff2'); font-weight:400; }
-    @font-face { font-family:'Radnika Next'; src:url('fonts/RadnikaNext-Medium.woff2') format('woff2'); font-weight:500; }
-    @font-face { font-family:'Radnika Next'; src:url('fonts/RadnikaNext-Bold.woff2') format('woff2'); font-weight:700; }
-    The CSS below already references 'Radnika Next' with fallbacks.
-  -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +21,7 @@
       --indigo: #D5D5F0;
       --indigo-dark: #C2C2E6;
       --indigo-accent: #A5A5D4;
-      --pink: #FCE4EC;
+      --pink: #f1e0e6;
       --pink-dark: #F3CFDA;
       --pink-accent: #E8A8BD;
       --text-primary: #2D2A32;
@@ -258,6 +250,18 @@
       font-size: 0.95rem;
       line-height: 1.55;
       color: var(--text-secondary);
+    }
+    .interest-item {
+      background: rgba(255,255,255,0.5);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--yellow-accent);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      display: inline-block;
+      width: auto;
     }
     .fun-fact-area {
       margin-top: 32px;
@@ -635,9 +639,17 @@
             <div class="leadership-item">
               President — Association for Computing Machinery (ACM), USD Chapter
             </div>
+            <div class="leadership-item">
+              Vice President — Fashion Forward at USD
+            </div>
             <div class="fun-fact-area">
-              <p class="label" style="margin-bottom:2px;">Fun Fact</p>
-              <p>I've participated in Filipino cultural dance performances since I was 6 years old!</p>
+              <p class="label" style="margin-bottom:2px;">Interests</p>
+              <div class="leadership-item">
+                Filipino Cultural Dance
+              </div>
+              <div class="leadership-item">
+                Filipino Cultural Dance
+              </div>
               <img src="images/dance2.jpg" alt="Hawaiian Dance: Auana" class="dance-photo">
               <img src="images/dance1.jpg" alt="Filipino Cultural Dance: Pandanggo sa Ilaw" class="dance-photo">
             </div>
