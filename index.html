@@ -4,7 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jenna Tumlos — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--
+    FONT NOTE: Radnika Next is a premium font (not on Google Fonts).
+    If you own it, host the .woff2 files in a /fonts folder and uncomment:
+    @font-face { font-family:'Radnika Next'; src:url('fonts/RadnikaNext-Regular.woff2') format('woff2'); font-weight:400; }
+    @font-face { font-family:'Radnika Next'; src:url('fonts/RadnikaNext-Medium.woff2') format('woff2'); font-weight:500; }
+    @font-face { font-family:'Radnika Next'; src:url('fonts/RadnikaNext-Bold.woff2') format('woff2'); font-weight:700; }
+    The CSS below already references 'Radnika Next' with fallbacks.
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -28,6 +36,7 @@
       --text-secondary: #5C5666;
       --text-muted: #8A8394;
       --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
+      --sub-font: 'Radnika Next', 'Instrument Sans', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -47,299 +56,465 @@
       inset: 0;
       z-index: 9999;
       pointer-events: none;
-      opacity: 0.30;
+      opacity: 0.28;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
       background-size: 180px 180px;
     }
 
-    /* ── Layout shell ── */
+    /* ── Layout — wider ── */
     .portfolio-shell {
-      max-width: 1080px;
+      max-width: 1440px;
+      width: 94%;
       margin: 0 auto;
-      padding: 40px 24px 60px;
+      padding: 36px 0 0;
       position: relative;
     }
 
-    /* ── Header ── */
-    .site-header {
-      text-align: center;
-      margin-bottom: 14px;
+    /* ── Header + Bubble Nav Row ── */
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(20px, 4vw, 48px);
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      padding: 0 20px;
       animation: fadeDown 0.6s ease-out both;
+    }
+    .site-header {
+      flex-shrink: 0;
     }
     .site-header h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(2.2rem, 5vw, 4rem);
       letter-spacing: -0.02em;
       color: var(--text-primary);
       line-height: 1.1;
     }
     .site-header .subtitle {
-      font-family: 'Caveat', cursive;
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-family: var(--sub-font);
+      font-weight: 500;
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
       color: var(--text-muted);
       margin-top: 4px;
+      letter-spacing: 0.04em;
     }
 
-    /* ── Tab Bar ── */
+    /* ══════════════════════════════════════
+       BUBBLE TABS
+       ══════════════════════════════════════ */
     .tab-bar {
       display: flex;
-      gap: 0;
-      align-items: flex-end;
-      padding: 0 4px;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
       position: relative;
       z-index: 10;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      animation: fadeDown 0.6s 0.15s ease-out both;
     }
-    .tab-bar::-webkit-scrollbar { display: none; }
 
     .tab-btn {
-      font-family: 'Caveat', cursive;
+      font-family: var(--sub-font);
       font-weight: 600;
-      font-size: clamp(0.88rem, 2vw, 1.1rem);
-      padding: 11px 24px 13px;
-      border: 2px solid transparent;
-      border-bottom: none;
-      border-radius: 14px 14px 0 0;
+      font-size: clamp(0.78rem, 1.5vw, 0.92rem);
+      padding: 12px 24px;
+      border: 2px solid rgba(0,0,0,0.06);
       cursor: pointer;
       position: relative;
-      bottom: -2px;
       white-space: nowrap;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       color: var(--text-secondary);
-      background: transparent;
+      background: rgba(255,255,255,0.35);
       flex-shrink: 0;
+      letter-spacing: 0.02em;
+      border-radius: 999px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .tab-btn:hover:not(.active) {
-      transform: translateY(-3px);
-      opacity: 0.85;
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.07);
     }
     .tab-btn.active {
       z-index: 12;
-      bottom: -2px;
       color: var(--text-primary);
       font-weight: 700;
+      transform: translateY(-3px);
     }
     .tab-btn[data-tab="home"]    { --tab-bg: var(--yellow); --tab-border: var(--yellow-accent); }
     .tab-btn[data-tab="coding"]  { --tab-bg: var(--blue);   --tab-border: var(--blue-accent);   }
     .tab-btn[data-tab="art"]     { --tab-bg: var(--purple); --tab-border: var(--purple-accent); }
     .tab-btn[data-tab="events"]  { --tab-bg: var(--indigo); --tab-border: var(--indigo-accent); }
     .tab-btn[data-tab="contact"] { --tab-bg: var(--pink);   --tab-border: var(--pink-accent);   }
-
     .tab-btn.active {
       background: var(--tab-bg);
       border-color: var(--tab-border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
     }
+    /* Subtle floating animation on bubbles */
+    @keyframes floatBubble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .tab-btn:nth-child(1) { animation: floatBubble 4.0s ease-in-out infinite; animation-delay: 0s;    }
+    .tab-btn:nth-child(2) { animation: floatBubble 4.5s ease-in-out infinite; animation-delay: 0.4s;  }
+    .tab-btn:nth-child(3) { animation: floatBubble 3.8s ease-in-out infinite; animation-delay: 0.8s;  }
+    .tab-btn:nth-child(4) { animation: floatBubble 4.2s ease-in-out infinite; animation-delay: 1.2s;  }
+    .tab-btn:nth-child(5) { animation: floatBubble 4.6s ease-in-out infinite; animation-delay: 0.6s;  }
+    .tab-btn:hover, .tab-btn.active { animation-play-state: paused; }
 
     /* ── Folder Body ── */
     .folder-body {
       background: var(--yellow);
       border: 2px solid var(--yellow-accent);
-      border-radius: 0 16px 16px 16px;
-      min-height: 520px;
+      border-radius: 24px;
+      min-height: 600px;
       position: relative;
       z-index: 5;
-      box-shadow: var(--shadow-soft), 0 8px 30px rgba(0,0,0,0.04);
+      box-shadow: var(--shadow-soft), 0 10px 40px rgba(0,0,0,0.05);
       transition: background 0.45s ease, border-color 0.45s ease;
+      display: flex;
+      flex-direction: column;
     }
-
-    /* Decorative stacked edges */
     .folder-stack { position: relative; z-index: 1; }
     .folder-stack::before,
     .folder-stack::after {
       content: '';
       display: block;
       height: 8px;
-      border-radius: 0 0 14px 14px;
+      border-radius: 0 0 18px 18px;
     }
-    .folder-stack::before { background: rgba(0,0,0,0.025); margin: 0 18px; }
-    .folder-stack::after  { background: rgba(0,0,0,0.015); margin: 0 32px; }
+    .folder-stack::before { background: rgba(0,0,0,0.02); margin: 0 24px; }
+    .folder-stack::after  { background: rgba(0,0,0,0.012); margin: 0 48px; }
 
     /* ── Pages ── */
     .tab-page {
       display: none;
-      padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 52px);
+      padding: clamp(32px, 5vw, 56px) clamp(28px, 5vw, 64px);
       animation: fadeIn 0.4s ease-out both;
+      flex: 1;
     }
     .tab-page.active { display: block; }
 
     /* ── Typography ── */
     .section-heading {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
       margin-bottom: 6px;
       line-height: 1.15;
     }
     .section-subheading {
-      font-family: 'Caveat', cursive;
-      font-size: 1.2rem;
+      font-family: var(--sub-font);
+      font-weight: 500;
+      font-size: 1.05rem;
       color: var(--text-muted);
-      margin-bottom: 28px;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
     }
     .label {
-      font-family: 'Caveat', cursive;
+      font-family: var(--sub-font);
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       color: var(--text-secondary);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+    }
+    .divider {
+      border: none;
+      border-top: 1.5px dashed rgba(0,0,0,0.08);
+      margin: 48px 0;
     }
 
-    /* ── About Grid ── */
+    /* ══════════════════════════════════════
+       HOME / ABOUT
+       ══════════════════════════════════════ */
     .about-grid {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 36px;
+      grid-template-columns: 300px 1fr;
+      gap: 48px;
       align-items: start;
     }
-    @media (max-width: 680px) {
+    @media (max-width: 800px) {
       .about-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
     }
     .profile-photo {
-      width: 200px;
-      height: 200px;
+      width: 300px;
+      height: 300px;
       object-fit: cover;
       border-radius: 50%;
-      border: 4px solid rgba(0,0,0,0.06);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 5px solid rgba(255,255,255,0.6);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.1);
     }
     .about-text p {
-      font-size: 0.98rem;
-      line-height: 1.72;
+      font-size: 1rem;
+      line-height: 1.75;
       color: var(--text-secondary);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .leadership-item {
       background: rgba(255,255,255,0.5);
-      border-radius: 10px;
-      padding: 14px 18px;
+      border-radius: 12px;
+      padding: 16px 20px;
       margin-bottom: 10px;
       border-left: 3px solid var(--yellow-accent);
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       line-height: 1.55;
       color: var(--text-secondary);
     }
     .fun-fact-area {
-      margin-top: 28px;
+      margin-top: 32px;
       display: flex;
-      gap: 16px;
+      gap: 18px;
       flex-wrap: wrap;
     }
     .fun-fact-area p { flex: 1 1 100%; }
     .dance-photo {
-      height: 220px;
-      border-radius: 12px;
+      height: 240px;
+      border-radius: 14px;
       object-fit: cover;
-      border: 3px solid rgba(0,0,0,0.05);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      border: 3px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
       transition: transform 0.3s ease;
     }
-    .dance-photo:hover { transform: rotate(-2deg) scale(1.03); }
+    .dance-photo:hover { transform: rotate(-1.5deg) scale(1.03); }
 
-    /* ── Project Cards ── */
+    /* ══════════════════════════════════════
+       CODING PROJECTS
+       ══════════════════════════════════════ */
     .project-card {
-      background: rgba(255,255,255,0.45);
-      border-radius: 14px;
-      padding: 28px 30px;
+      background: rgba(255,255,255,0.42);
+      border-radius: 18px;
+      padding: 32px 34px;
       margin-bottom: 28px;
       border: 1.5px solid rgba(0,0,0,0.05);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .project-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.06);
     }
     .project-card-grid {
       display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 28px;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
       align-items: start;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 780px) {
       .project-card-grid { grid-template-columns: 1fr; }
     }
     .project-img {
       width: 100%;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 2px solid rgba(0,0,0,0.04);
     }
     .project-card h3 {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       margin-bottom: 4px;
     }
     .project-card .semester {
-      font-family: 'Caveat', cursive;
+      font-family: var(--sub-font);
+      font-weight: 500;
       color: var(--text-muted);
-      font-size: 1.05rem;
-      margin-bottom: 14px;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
     }
-    .project-card .detail-label {
+    .project-card .detail-label,
+    .detail-label {
+      font-family: var(--sub-font);
       font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin: 14px 0 4px;
+      margin: 16px 0 5px;
     }
     .project-card .detail-label:first-of-type { margin-top: 0; }
     .project-card p {
-      font-size: 0.93rem;
-      line-height: 1.68;
+      font-size: 0.94rem;
+      line-height: 1.7;
       color: var(--text-secondary);
     }
 
-    /* ── Placeholder ── */
-    .placeholder-page {
-      text-align: center;
-      padding: 80px 20px;
+    /* Inspiration photo grid */
+    .inspo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
     }
-    .placeholder-page .icon {
-      font-size: 3.5rem;
-      margin-bottom: 16px;
-      display: block;
-      opacity: 0.45;
-    }
-    .placeholder-page h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-    .placeholder-page p {
-      font-size: 1rem;
+    .inspo-slot {
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      border: 2px dashed rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sub-font);
+      font-size: 0.8rem;
       color: var(--text-muted);
-      max-width: 420px;
-      margin: 0 auto;
-      line-height: 1.65;
+      overflow: hidden;
+      transition: border-color 0.2s;
     }
+    .inspo-slot:hover { border-color: rgba(0,0,0,0.18); }
+    .inspo-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
 
-    /* ── Contact ── */
+    /* ══════════════════════════════════════
+       VISUAL ART
+       ══════════════════════════════════════ */
+    .art-project {
+      background: rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 36px 38px;
+      margin-bottom: 32px;
+      border: 1.5px solid rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .art-project:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+    .art-project h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 2px;
+    }
+    .art-project .art-date {
+      font-family: var(--sub-font);
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+    .art-project .art-label {
+      font-family: var(--sub-font);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 18px 0 6px;
+    }
+    .art-project .art-label:first-of-type { margin-top: 0; }
+    .art-project p {
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .art-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .art-photo-slot {
+      aspect-ratio: 1/1;
+      border-radius: 14px;
+      border: 2px dashed rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sub-font);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .art-photo-slot:hover { border-color: rgba(0,0,0,0.18); }
+    .art-photo-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+
+    /* ══════════════════════════════════════
+       EVENT PLANNING
+       ══════════════════════════════════════ */
+    .event-project {
+      background: rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 36px 38px;
+      margin-bottom: 32px;
+      border: 1.5px solid rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .event-project:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+    .event-project h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 2px;
+    }
+    .event-project .event-date {
+      font-family: var(--sub-font);
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+    .event-project .event-label {
+      font-family: var(--sub-font);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 18px 0 6px;
+    }
+    .event-project .event-label:first-of-type { margin-top: 0; }
+    .event-project p {
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .event-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+    .event-photo-slot {
+      aspect-ratio: 16/10;
+      border-radius: 16px;
+      border: 2px dashed rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sub-font);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .event-photo-slot:hover { border-color: rgba(0,0,0,0.18); }
+    .event-photo-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+
+    /* ══════════════════════════════════════
+       CONTACT (full page)
+       ══════════════════════════════════════ */
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      max-width: 600px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 700px;
       margin: 0 auto;
     }
     .contact-card {
       background: rgba(255,255,255,0.5);
-      border-radius: 14px;
-      padding: 30px 24px;
+      border-radius: 16px;
+      padding: 36px 28px;
       text-align: center;
       border: 1.5px solid rgba(0,0,0,0.05);
       transition: transform 0.3s ease;
     }
     .contact-card:hover { transform: translateY(-3px); }
-    .contact-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      display: block;
-    }
+    .contact-icon { font-size: 2.2rem; margin-bottom: 14px; display: block; }
     .contact-card h3 {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
+      font-size: 1.15rem;
+      margin-bottom: 8px;
     }
     .contact-card a {
       color: var(--text-secondary);
@@ -349,18 +524,43 @@
       transition: color 0.2s;
     }
     .contact-card a:hover { color: var(--text-primary); }
-    .contact-card span.val {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
+    .contact-card span.val { color: var(--text-secondary); font-size: 0.95rem; }
+
+    /* ══════════════════════════════════════
+       PERSISTENT CONTACT BAR
+       ══════════════════════════════════════ */
+    .contact-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 20px 28px;
+      border-top: 1.5px dashed rgba(0,0,0,0.07);
+      margin-top: auto;
+      border-radius: 0 0 22px 22px;
+      background: rgba(255,255,255,0.18);
     }
+    .contact-bar a,
+    .contact-bar span {
+      font-family: var(--sub-font);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .contact-bar a:hover { color: var(--text-primary); }
+    .contact-bar .bar-icon { font-size: 1.1rem; }
 
     /* ── Footer ── */
     .site-footer {
       text-align: center;
-      padding: 32px 20px 24px;
-      font-size: 0.8rem;
+      padding: 28px 20px 24px;
+      font-size: 0.78rem;
       color: var(--text-muted);
-      animation: fadeDown 0.6s 0.3s ease-out both;
     }
     .site-footer a { color: var(--text-secondary); }
 
@@ -379,13 +579,17 @@
     }
     .stagger { animation: stagger1 0.5s ease-out both; }
     .stagger:nth-child(1) { animation-delay: 0.05s; }
-    .stagger:nth-child(2) { animation-delay: 0.15s; }
-    .stagger:nth-child(3) { animation-delay: 0.25s; }
+    .stagger:nth-child(2) { animation-delay: 0.12s; }
+    .stagger:nth-child(3) { animation-delay: 0.19s; }
+    .stagger:nth-child(4) { animation-delay: 0.26s; }
 
-    /* ── Responsive ── */
-    @media (max-width: 500px) {
-      .tab-btn { padding: 8px 14px 10px; font-size: 0.82rem; }
-      .folder-body { border-radius: 0 12px 12px 12px; }
+    @media (max-width: 600px) {
+      .header-row { flex-direction: column; gap: 16px; }
+      .site-header { text-align: center; }
+      .tab-btn { padding: 10px 18px; font-size: 0.76rem; }
+      .folder-body { border-radius: 18px; }
+      .contact-bar { gap: 18px; padding: 16px 20px; }
+      .event-photo-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -393,22 +597,22 @@
 
 <div class="portfolio-shell">
 
-  <!-- Header -->
-  <header class="site-header">
-    <h1>Jenna Tumlos</h1>
-    <p class="subtitle">engineer · leader · creative</p>
-  </header>
+  <div class="header-row">
+    <header class="site-header">
+      <h1>Jenna Tumlos</h1>
+      <p class="subtitle">engineer · leader · creative</p>
+    </header>
 
-  <!-- Tab Bar -->
-  <nav class="tab-bar" role="tablist">
-    <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">Home &amp; About</button>
-    <button class="tab-btn" data-tab="coding" role="tab" aria-selected="false">Coding Projects</button>
-    <button class="tab-btn" data-tab="art" role="tab" aria-selected="false">Visual Art</button>
-    <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Event Planning</button>
-    <button class="tab-btn" data-tab="contact" role="tab" aria-selected="false">Contact Me</button>
-  </nav>
+    <!-- Bubble Tabs -->
+    <nav class="tab-bar" role="tablist">
+      <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">Home & About</button>
+      <button class="tab-btn" data-tab="coding" role="tab" aria-selected="false">Coding Projects</button>
+      <button class="tab-btn" data-tab="art" role="tab" aria-selected="false">Visual Art</button>
+      <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Event Planning</button>
+      <button class="tab-btn" data-tab="contact" role="tab" aria-selected="false">Contact Me</button>
+    </nav>
+  </div>
 
-  <!-- Folder Body -->
   <div class="folder-stack">
     <div class="folder-body" id="folderBody">
 
@@ -416,16 +620,14 @@
       <div class="tab-page active" id="page-home">
         <h2 class="section-heading">Hello!</h2>
         <p class="section-subheading">a little bit about me</p>
-
         <div class="about-grid">
           <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="profile-photo">
           <div class="about-text">
             <p>
               A creator, engineer, and soon to be USD graduate eager to expand knowledge beyond the classroom. I'm a
-              strong leader and collaborator, innovating creative projects and events for class, clubs, & fun. 
-              I'm passionate about promoting diversity and inclusion, building community, and cultivating a culture of unity. 
+              strong leader and collaborator, innovating creative projects and events for class, clubs, &amp; fun.
+              I'm passionate about promoting diversity and inclusion, building community, and cultivating a culture of unity.
             </p>
-
             <p class="label">Current Leadership Roles</p>
             <div class="leadership-item">
               Co-President — Society of Asian Scientists and Engineers (SASE), USD Chapter
@@ -433,7 +635,6 @@
             <div class="leadership-item">
               President — Association for Computing Machinery (ACM), USD Chapter
             </div>
-
             <div class="fun-fact-area">
               <p class="label" style="margin-bottom:2px;">Fun Fact</p>
               <p>I've participated in Filipino cultural dance performances since I was 6 years old!</p>
@@ -446,7 +647,9 @@
 
       <!-- ═══ CODING PROJECTS ═══ -->
       <div class="tab-page" id="page-coding">
+
         <h2 class="section-heading">Creative Coding Projects</h2>
+        <p class="section-subheading">where art meets algorithm</p>
 
         <div class="project-card stagger">
           <div class="project-card-grid">
@@ -456,31 +659,44 @@
               <p class="semester">Spring 2024 · Creative Algorithms</p>
               <p class="detail-label">Description</p>
               <p>
-                SOLAR CENTER is a simple and personalizable meditation guide that aims to help balance hectic lifestyles and mindfulness
-                through breathwork and exercising creativity.
+                SOLAR CENTER is a simple and personalizable meditation guide that aims to help balance hectic lifestyles
+                and mindfulness through breathwork and exercising creativity.
               </p>
               <p class="detail-label">Motivation</p>
               <p>
-                As life grew busier than before Sophomore year, balancing so many responsibilities led me to forget the importance in self care and taking breaks.
-                I wanted to create a design/visual/process that could focus my attention at something almost hypnotizing to relax hyper
-                minds. It acts as a brain break, still activating our brains but with less cognitive load.
+                As life grew busier than before Sophomore year, balancing so many responsibilities led me to forget the
+                importance in self care and taking breaks. I wanted to create a design/visual/process that could focus my
+                attention at something almost hypnotizing to relax hyper minds.
               </p>
               <p class="detail-label">Inspiration</p>
               <p>
-                Seeing an 80s design of a pixelated horizon amidst finals season, I felt there was quite peaceful tone to the simplicity of the graphic. 
-                Although it is blocky and game-like, I thought the style could be an interesting take on a
-                meditation guide, contrasting yet oddly coinciding with the calming aspects of meditation.
+                Seeing an 80s design of a pixelated horizon amidst finals season, I felt there was quite a peaceful tone
+                to the simplicity of the graphic. I thought the style could be an interesting take on a meditation guide,
+                contrasting yet oddly coinciding with the calming aspects of meditation.
               </p>
               <p class="detail-label">Design &amp; Implementation</p>
               <p>
-                The app was built in Java using the Processing library. It features a dynamic horizon that expands and contracts with the user's breath, a timer for meditation sessions, and customizable color schemes. I focused on creating smooth animations and an intuitive interface to enhance the user experience. Building this project was a rewarding exploration of creative coding and personal wellness.
-                Features I implemented include the breathing horizon animation, session timer, and color customization options.
+                The app was built in Java using the Processing library. It features a dynamic horizon that expands and
+                contracts with the user's breath, a timer for meditation sessions, and customizable color schemes. I
+                focused on creating smooth animations and an intuitive interface to enhance the user experience.
               </p>
-              </div>
             </div>
+          </div>
+          <p class="detail-label" style="margin-top:28px;">Inspiration &amp; Process</p>
+          <div class="inspo-grid">
+            <div class="inspo-slot">+ add photo</div>
+            <div class="inspo-slot">+ add photo</div>
+            <div class="inspo-slot">+ add photo</div>
+            <div class="inspo-slot">+ add photo</div>
+          </div>
+        </div>
 
-          <h2 class="section-heading">Recent Class Coding Projects</h2>
+        <hr class="divider">
 
+        <h2 class="section-heading">Class Coding Projects</h2>
+        <p class="section-subheading">object-oriented design &amp; development</p>
+
+        <div class="project-card stagger">
           <div class="project-card-grid">
             <img src="images/timely_demo.png" alt="Demo of Timely App" class="project-img">
             <div>
@@ -499,8 +715,7 @@
               <p class="detail-label">Design &amp; Implementation</p>
               <p>
                 The back-end follows the MVC pattern with Observer and Facade patterns. I implemented the To Do List and Progress Chart
-                components, and did a full code cleanup to ensure all lines were relevant. Building interactive UI with MVC was a
-                rewarding learning experience.
+                components, and did a full code cleanup to ensure all lines were relevant.
               </p>
             </div>
           </div>
@@ -518,9 +733,7 @@
                 to determine which elevator answers each call.
               </p>
               <p class="detail-label">Motivation</p>
-              <p>
-                Develop a program using Test Driven Development and Object Oriented Principles.
-              </p>
+              <p>Develop a program using Test Driven Development and Object Oriented Principles.</p>
               <p class="detail-label">Design &amp; Implementation</p>
               <p>
                 We used interfaces for Elevators and Schedulers for uniformity. I implemented the Express and Freight elevator
@@ -542,9 +755,7 @@
                 room sharing a birthday.
               </p>
               <p class="detail-label">Motivation</p>
-              <p>
-                Focus on writing clean code and efficient tests using Mockito.
-              </p>
+              <p>Focus on writing clean code and efficient tests using Mockito.</p>
               <p class="detail-label">Design &amp; Implementation</p>
               <p>
                 The Simulation class runs groups of 5 to 100 people. I implemented the Simulation, Trial, and Experiment classes
@@ -557,27 +768,104 @@
 
       <!-- ═══ VISUAL ART ═══ -->
       <div class="tab-page" id="page-art">
-        <div class="placeholder-page">
-          <span class="icon">🎨</span>
-          <h2>Visual Art Projects</h2>
-          <p>Coming soon — this folder is being filled with illustrations, designs, and creative experiments. Check back shortly!</p>
+        <h2 class="section-heading">Visual Art Projects</h2>
+        <p class="section-subheading">illustrations, designs &amp; creative experiments</p>
+
+        <div class="art-project stagger">
+          <h3>Project Title</h3>
+          <p class="art-date">Season Year · Medium / Context</p>
+          <p class="art-label">Ideation &amp; Inspiration</p>
+          <p>Describe the spark behind this piece — what inspired the concept, mood board references, or creative questions you were exploring.</p>
+          <p class="art-label">Learning Outcome</p>
+          <p>Reflect on what you learned — new techniques, tools, perspectives, or creative growth that came from this project.</p>
+          <div class="art-photo-grid">
+            <div class="art-photo-slot">+ add photo</div>
+            <div class="art-photo-slot">+ add photo</div>
+            <div class="art-photo-slot">+ add photo</div>
+          </div>
+        </div>
+
+        <div class="art-project stagger">
+          <h3>Project Title</h3>
+          <p class="art-date">Season Year · Medium / Context</p>
+          <p class="art-label">Ideation &amp; Inspiration</p>
+          <p>Describe the spark behind this piece — what inspired the concept, mood board references, or creative questions you were exploring.</p>
+          <p class="art-label">Learning Outcome</p>
+          <p>Reflect on what you learned — new techniques, tools, perspectives, or creative growth that came from this project.</p>
+          <div class="art-photo-grid">
+            <div class="art-photo-slot">+ add photo</div>
+            <div class="art-photo-slot">+ add photo</div>
+            <div class="art-photo-slot">+ add photo</div>
+          </div>
+        </div>
+
+        <div class="art-project stagger">
+          <h3>Project Title</h3>
+          <p class="art-date">Season Year · Medium / Context</p>
+          <p class="art-label">Ideation &amp; Inspiration</p>
+          <p>Describe the spark behind this piece — what inspired the concept, mood board references, or creative questions you were exploring.</p>
+          <p class="art-label">Learning Outcome</p>
+          <p>Reflect on what you learned — new techniques, tools, perspectives, or creative growth that came from this project.</p>
+          <div class="art-photo-grid">
+            <div class="art-photo-slot">+ add photo</div>
+            <div class="art-photo-slot">+ add photo</div>
+            <div class="art-photo-slot">+ add photo</div>
+          </div>
         </div>
       </div>
 
       <!-- ═══ EVENT PLANNING ═══ -->
       <div class="tab-page" id="page-events">
-        <div class="placeholder-page">
-          <span class="icon">📋</span>
-          <h2>Event Planning Projects</h2>
-          <p>Coming soon — details on events organized through SASE, ACM, and beyond will appear here.</p>
+        <h2 class="section-heading">Event Planning Projects</h2>
+        <p class="section-subheading">organizing moments that bring people together</p>
+
+        <div class="event-project stagger">
+          <h3>Event Title</h3>
+          <p class="event-date">Date · Organization / Context</p>
+          <p class="event-label">Ideation &amp; Inspiration</p>
+          <p>Describe the vision behind this event — what motivated it, the goals you set, and how you planned the experience.</p>
+          <p class="event-label">Learning Outcome</p>
+          <p>Reflect on what you learned about leadership, logistics, collaboration, or community building through this event.</p>
+          <div class="event-photo-grid">
+            <div class="event-photo-slot">+ add photo</div>
+            <div class="event-photo-slot">+ add photo</div>
+            <div class="event-photo-slot">+ add photo</div>
+          </div>
+        </div>
+
+        <div class="event-project stagger">
+          <h3>Event Title</h3>
+          <p class="event-date">Date · Organization / Context</p>
+          <p class="event-label">Ideation &amp; Inspiration</p>
+          <p>Describe the vision behind this event — what motivated it, the goals you set, and how you planned the experience.</p>
+          <p class="event-label">Learning Outcome</p>
+          <p>Reflect on what you learned about leadership, logistics, collaboration, or community building through this event.</p>
+          <div class="event-photo-grid">
+            <div class="event-photo-slot">+ add photo</div>
+            <div class="event-photo-slot">+ add photo</div>
+            <div class="event-photo-slot">+ add photo</div>
+          </div>
+        </div>
+
+        <div class="event-project stagger">
+          <h3>Event Title</h3>
+          <p class="event-date">Date · Organization / Context</p>
+          <p class="event-label">Ideation &amp; Inspiration</p>
+          <p>Describe the vision behind this event — what motivated it, the goals you set, and how you planned the experience.</p>
+          <p class="event-label">Learning Outcome</p>
+          <p>Reflect on what you learned about leadership, logistics, collaboration, or community building through this event.</p>
+          <div class="event-photo-grid">
+            <div class="event-photo-slot">+ add photo</div>
+            <div class="event-photo-slot">+ add photo</div>
+            <div class="event-photo-slot">+ add photo</div>
+          </div>
         </div>
       </div>
 
-      <!-- ═══ CONTACT ═══ -->
+      <!-- ═══ CONTACT (full page) ═══ -->
       <div class="tab-page" id="page-contact">
         <h2 class="section-heading" style="text-align:center;">Get in Touch</h2>
         <p class="section-subheading" style="text-align:center;">I'd love to hear from you</p>
-
         <div class="contact-grid">
           <div class="contact-card">
             <span class="contact-icon">✉️</span>
@@ -590,6 +878,14 @@
             <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener">jenna-therese-tumlos</a>
           </div>
         </div>
+      </div>
+
+      <!-- Persistent Contact Bar -->
+      <div class="contact-bar">
+        <span><span class="bar-icon">✉️</span> jtumlos@sandiego.edu</span>
+        <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener">
+          <span class="bar-icon">💼</span> LinkedIn
+        </a>
       </div>
 
     </div>
@@ -617,13 +913,6 @@
     contact: { bg: 'var(--pink)',    border: 'var(--pink-accent)'    },
   };
 
-  function updateFolderRadius(tabEl) {
-    const idx = Array.from(tabBtns).indexOf(tabEl);
-    folderBody.style.borderRadius = idx === 0
-      ? '0 16px 16px 16px'
-      : '16px 16px 16px 16px';
-  }
-
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
@@ -639,11 +928,11 @@
       folderBody.style.background = colors.bg;
       folderBody.style.borderColor = colors.border;
 
-      updateFolderRadius(btn);
-
-      // Re-trigger stagger on project cards
+      // Re-trigger stagger
       const cards = document.querySelectorAll('#page-' + tab + ' .stagger');
       cards.forEach(c => { c.style.animation = 'none'; void c.offsetHeight; c.style.animation = ''; });
+
+      folderBody.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 </script>
