@@ -7,608 +7,185 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --yellow: #FFF8DC;
-      --yellow-dark: #F5EDCA;
-      --yellow-accent: #E8D9A0;
-      --blue: #DCEEFB;
-      --blue-dark: #C9E1F5;
-      --blue-accent: #A3C8E8;
-      --purple: #E8DCED;
-      --purple-dark: #D9C9E2;
-      --purple-accent: #C0A8D0;
-      --indigo: #D5D5F0;
-      --indigo-dark: #C2C2E6;
-      --indigo-accent: #A5A5D4;
-      --pink: #f1e0e6;
-      --pink-dark: #F3CFDA;
-      --pink-accent: #E8A8BD;
-      --text-primary: #2D2A32;
-      --text-secondary: #5C5666;
-      --text-muted: #8A8394;
+      --yellow: #FFF8DC; --yellow-dark: #F5EDCA; --yellow-accent: #E8D9A0;
+      --blue: #DCEEFB; --blue-dark: #C9E1F5; --blue-accent: #A3C8E8;
+      --purple: #E8DCED; --purple-dark: #D9C9E2; --purple-accent: #C0A8D0;
+      --indigo: #D5D5F0; --indigo-dark: #C2C2E6; --indigo-accent: #A5A5D4;
+      --pink: #f1e0e6; --pink-dark: #F3CFDA; --pink-accent: #E8A8BD;
+      --text-primary: #2D2A32; --text-secondary: #5C5666; --text-muted: #8A8394;
       --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
       --sub-font: 'Radnika Next', 'Instrument Sans', sans-serif;
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'Instrument Sans', sans-serif; color: var(--text-primary); min-height: 100vh; overflow-x: hidden; background: #EDE8DF; }
 
-    body {
-      font-family: 'Instrument Sans', sans-serif;
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: #EDE8DF;
-    }
+    body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.28;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size:180px 180px; }
 
-    /* ── Grain overlay ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.28;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      background-size: 180px 180px;
-    }
+    .portfolio-shell { max-width:1440px; width:94%; margin:0 auto; padding:36px 0 0; position:relative; }
 
-    /* ── Layout — wider ── */
-    .portfolio-shell {
-      max-width: 1440px;
-      width: 94%;
-      margin: 0 auto;
-      padding: 36px 0 0;
-      position: relative;
-    }
+    .header-row { display:flex; align-items:center; justify-content:center; gap:clamp(20px,4vw,48px); flex-wrap:wrap; margin-bottom:24px; padding:0 20px; animation:fadeDown 0.6s ease-out both; }
+    .site-header { flex-shrink:0; }
+    .site-header h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.2rem,5vw,4rem); letter-spacing:-0.02em; color:var(--text-primary); line-height:1.1; }
+    .site-header .subtitle { font-family:var(--sub-font); font-weight:500; font-size:clamp(0.9rem,1.8vw,1.1rem); color:var(--text-muted); margin-top:4px; letter-spacing:0.04em; }
 
-    /* ── Header + Bubble Nav Row ── */
-    .header-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(20px, 4vw, 48px);
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-      padding: 0 20px;
-      animation: fadeDown 0.6s ease-out both;
-    }
-    .site-header {
-      flex-shrink: 0;
-    }
-    .site-header h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      line-height: 1.1;
-    }
-    .site-header .subtitle {
-      font-family: var(--sub-font);
-      font-weight: 500;
-      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-      color: var(--text-muted);
-      margin-top: 4px;
-      letter-spacing: 0.04em;
-    }
+    .tab-bar { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; position:relative; z-index:10; }
+    .tab-btn { font-family:var(--sub-font); font-weight:600; font-size:clamp(0.78rem,1.5vw,0.92rem); padding:12px 24px; border:2px solid rgba(0,0,0,0.06); cursor:pointer; position:relative; white-space:nowrap; transition:all 0.35s cubic-bezier(0.4,0,0.2,1); color:var(--text-secondary); background:rgba(255,255,255,0.35); flex-shrink:0; letter-spacing:0.02em; border-radius:999px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+    .tab-btn:hover:not(.active) { transform:translateY(-4px) scale(1.05); box-shadow:0 6px 18px rgba(0,0,0,0.07); }
+    .tab-btn.active { z-index:12; color:var(--text-primary); font-weight:700; transform:translateY(-3px); }
+    .tab-btn[data-tab="home"]   {--tab-bg:var(--yellow);--tab-border:var(--yellow-accent)}
+    .tab-btn[data-tab="coding"] {--tab-bg:var(--blue);--tab-border:var(--blue-accent)}
+    .tab-btn[data-tab="art"]    {--tab-bg:var(--purple);--tab-border:var(--purple-accent)}
+    .tab-btn[data-tab="events"] {--tab-bg:var(--indigo);--tab-border:var(--indigo-accent)}
+    .tab-btn[data-tab="contact"]{--tab-bg:var(--pink);--tab-border:var(--pink-accent)}
+    .tab-btn.active { background:var(--tab-bg); border-color:var(--tab-border); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
+    @keyframes floatBubble { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+    .tab-btn:nth-child(1){animation:floatBubble 4s ease-in-out infinite;animation-delay:0s}
+    .tab-btn:nth-child(2){animation:floatBubble 4.5s ease-in-out infinite;animation-delay:.4s}
+    .tab-btn:nth-child(3){animation:floatBubble 3.8s ease-in-out infinite;animation-delay:.8s}
+    .tab-btn:nth-child(4){animation:floatBubble 4.2s ease-in-out infinite;animation-delay:1.2s}
+    .tab-btn:nth-child(5){animation:floatBubble 4.6s ease-in-out infinite;animation-delay:.6s}
+    .tab-btn:hover,.tab-btn.active{animation-play-state:paused}
 
-    /* ══════════════════════════════════════
-       BUBBLE TABS
-       ══════════════════════════════════════ */
-    .tab-bar {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      position: relative;
-      z-index: 10;
-    }
+    .folder-body { background:var(--yellow); border:2px solid var(--yellow-accent); border-radius:24px; min-height:600px; position:relative; z-index:5; box-shadow:var(--shadow-soft),0 10px 40px rgba(0,0,0,0.05); transition:background 0.45s ease,border-color 0.45s ease; display:flex; flex-direction:column; }
+    .folder-stack { position:relative; z-index:1; }
+    .folder-stack::before,.folder-stack::after { content:''; display:block; height:8px; border-radius:0 0 18px 18px; }
+    .folder-stack::before { background:rgba(0,0,0,0.02); margin:0 24px; }
+    .folder-stack::after { background:rgba(0,0,0,0.012); margin:0 48px; }
 
-    .tab-btn {
-      font-family: var(--sub-font);
-      font-weight: 600;
-      font-size: clamp(0.78rem, 1.5vw, 0.92rem);
-      padding: 12px 24px;
-      border: 2px solid rgba(0,0,0,0.06);
-      cursor: pointer;
-      position: relative;
-      white-space: nowrap;
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      color: var(--text-secondary);
-      background: rgba(255,255,255,0.35);
-      flex-shrink: 0;
-      letter-spacing: 0.02em;
-      border-radius: 999px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .tab-btn:hover:not(.active) {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.07);
-    }
-    .tab-btn.active {
-      z-index: 12;
-      color: var(--text-primary);
-      font-weight: 700;
-      transform: translateY(-3px);
-    }
-    .tab-btn[data-tab="home"]    { --tab-bg: var(--yellow); --tab-border: var(--yellow-accent); }
-    .tab-btn[data-tab="coding"]  { --tab-bg: var(--blue);   --tab-border: var(--blue-accent);   }
-    .tab-btn[data-tab="art"]     { --tab-bg: var(--purple); --tab-border: var(--purple-accent); }
-    .tab-btn[data-tab="events"]  { --tab-bg: var(--indigo); --tab-border: var(--indigo-accent); }
-    .tab-btn[data-tab="contact"] { --tab-bg: var(--pink);   --tab-border: var(--pink-accent);   }
-    .tab-btn.active {
-      background: var(--tab-bg);
-      border-color: var(--tab-border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-    /* Subtle floating animation on bubbles */
-    @keyframes floatBubble {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-    .tab-btn:nth-child(1) { animation: floatBubble 4.0s ease-in-out infinite; animation-delay: 0s;    }
-    .tab-btn:nth-child(2) { animation: floatBubble 4.5s ease-in-out infinite; animation-delay: 0.4s;  }
-    .tab-btn:nth-child(3) { animation: floatBubble 3.8s ease-in-out infinite; animation-delay: 0.8s;  }
-    .tab-btn:nth-child(4) { animation: floatBubble 4.2s ease-in-out infinite; animation-delay: 1.2s;  }
-    .tab-btn:nth-child(5) { animation: floatBubble 4.6s ease-in-out infinite; animation-delay: 0.6s;  }
-    .tab-btn:hover, .tab-btn.active { animation-play-state: paused; }
+    .tab-page { display:none; padding:clamp(32px,5vw,56px) clamp(28px,5vw,64px); animation:fadeIn 0.4s ease-out both; flex:1; }
+    .tab-page.active { display:block; }
 
-    /* ── Folder Body ── */
-    .folder-body {
-      background: var(--yellow);
-      border: 2px solid var(--yellow-accent);
-      border-radius: 24px;
-      min-height: 600px;
-      position: relative;
-      z-index: 5;
-      box-shadow: var(--shadow-soft), 0 10px 40px rgba(0,0,0,0.05);
-      transition: background 0.45s ease, border-color 0.45s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .folder-stack { position: relative; z-index: 1; }
-    .folder-stack::before,
-    .folder-stack::after {
-      content: '';
-      display: block;
-      height: 8px;
-      border-radius: 0 0 18px 18px;
-    }
-    .folder-stack::before { background: rgba(0,0,0,0.02); margin: 0 24px; }
-    .folder-stack::after  { background: rgba(0,0,0,0.012); margin: 0 48px; }
+    .section-heading { font-family:'DM Serif Display',serif; font-size:clamp(1.8rem,3.5vw,2.5rem); margin-bottom:6px; line-height:1.15; }
+    .section-subheading { font-family:var(--sub-font); font-weight:500; font-size:1.05rem; color:var(--text-muted); margin-bottom:32px; letter-spacing:0.02em; }
+    .label { font-family:var(--sub-font); font-weight:700; font-size:1.05rem; color:var(--text-secondary); margin-bottom:6px; }
+    .divider { border:none; border-top:1.5px dashed rgba(0,0,0,0.08); margin:48px 0; }
 
-    /* ── Pages ── */
-    .tab-page {
-      display: none;
-      padding: clamp(32px, 5vw, 56px) clamp(28px, 5vw, 64px);
-      animation: fadeIn 0.4s ease-out both;
-      flex: 1;
-    }
-    .tab-page.active { display: block; }
+    /* HOME */
+    .about-grid { display:grid; grid-template-columns:300px 1fr; gap:48px; align-items:start; }
+    @media(max-width:800px){ .about-grid{grid-template-columns:1fr;justify-items:center;text-align:center} }
+    .profile-photo { width:300px; height:300px; object-fit:cover; border-radius:50%; border:5px solid rgba(255,255,255,0.6); box-shadow:0 6px 28px rgba(0,0,0,0.1); cursor:pointer; }
+    .about-text p { font-size:1rem; line-height:1.75; color:var(--text-secondary); margin-bottom:16px; }
+    .leadership-item { background:rgba(255,255,255,0.5); border-radius:12px; padding:16px 20px; margin-bottom:10px; border-left:3px solid var(--yellow-accent); font-size:0.95rem; line-height:1.55; color:var(--text-secondary); }
+    .interest-item { display:inline-block; background:rgba(255,255,255,0.5); border-radius:12px; padding:10px 18px; margin-bottom:8px; margin-right:8px; border-left:3px solid var(--yellow-accent); font-size:0.95rem; line-height:1.55; color:var(--text-secondary); }
+    .fun-fact-area { margin-top:32px; display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start; }
+    .fun-fact-area p { flex:1 1 100%; }
+    .dance-photo { height:240px; border-radius:14px; object-fit:cover; border:3px solid rgba(255,255,255,0.5); box-shadow:0 4px 18px rgba(0,0,0,0.07); transition:transform 0.3s ease; cursor:pointer; }
+    .dance-photo:hover { transform:rotate(-1.5deg) scale(1.03); }
 
-    /* ── Typography ── */
-    .section-heading {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-      margin-bottom: 6px;
-      line-height: 1.15;
-    }
-    .section-subheading {
-      font-family: var(--sub-font);
-      font-weight: 500;
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      letter-spacing: 0.02em;
-    }
-    .label {
-      font-family: var(--sub-font);
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-    .divider {
-      border: none;
-      border-top: 1.5px dashed rgba(0,0,0,0.08);
-      margin: 48px 0;
-    }
+    /* CODING */
+    .project-card { background:rgba(255,255,255,0.42); border-radius:18px; padding:32px 34px; margin-bottom:28px; border:1.5px solid rgba(0,0,0,0.05); transition:transform 0.3s ease,box-shadow 0.3s ease; }
+    .project-card:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,0,0,0.06); }
+    .project-card-grid { display:grid; grid-template-columns:280px 1fr; gap:32px; align-items:start; }
+    @media(max-width:780px){ .project-card-grid{grid-template-columns:1fr} }
+    .project-img { width:100%; border-radius:12px; border:2px solid rgba(0,0,0,0.04); cursor:pointer; }
+    .project-card h3 { font-family:'DM Serif Display',serif; font-size:1.4rem; margin-bottom:4px; }
+    .project-card .semester { font-family:var(--sub-font); font-weight:500; color:var(--text-muted); font-size:0.95rem; margin-bottom:16px; letter-spacing:0.02em; }
+    .project-card .detail-label,.detail-label { font-family:var(--sub-font); font-weight:700; font-size:0.78rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin:16px 0 5px; }
+    .project-card .detail-label:first-of-type { margin-top:0; }
+    .project-card p { font-size:0.94rem; line-height:1.7; color:var(--text-secondary); }
+    .inspo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; margin-top:14px; }
+    .inspo-slot { aspect-ratio:4/3; border-radius:12px; border:2px dashed rgba(0,0,0,0.1); background:rgba(255,255,255,0.35); display:flex; align-items:center; justify-content:center; font-family:var(--sub-font); font-size:0.8rem; color:var(--text-muted); overflow:hidden; }
+    .inspo-slot:hover { border-color:rgba(0,0,0,0.18); }
+    .inspo-slot img { width:100%; height:100%; object-fit:cover; border-radius:10px; cursor:pointer; }
 
-    /* ══════════════════════════════════════
-       HOME / ABOUT
-       ══════════════════════════════════════ */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 48px;
-      align-items: start;
-    }
-    @media (max-width: 800px) {
-      .about-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-    }
-    .profile-photo {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid rgba(255,255,255,0.6);
-      box-shadow: 0 6px 28px rgba(0,0,0,0.1);
-    }
-    .about-text p {
-      font-size: 1rem;
-      line-height: 1.75;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-    .leadership-item {
-      background: rgba(255,255,255,0.5);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 10px;
-      border-left: 3px solid var(--yellow-accent);
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: var(--text-secondary);
-    }
-    .interest-item {
-      background: rgba(255,255,255,0.5);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 10px;
-      border-left: 3px solid var(--yellow-accent);
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: var(--text-secondary);
-      width: auto;
-    }
-    .fun-fact-area {
-      margin-top: 32px;
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .fun-fact-area p { flex: 1 1 100%; }
-    .dance-photo {
-      height: 240px;
-      border-radius: 14px;
-      object-fit: cover;
-      border: 3px solid rgba(255,255,255,0.5);
-      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
-      transition: transform 0.3s ease;
-    }
-    .dance-photo:hover { transform: rotate(-1.5deg) scale(1.03); }
+    /* ART */
+    .art-project { background:rgba(255,255,255,0.4); border-radius:20px; padding:36px 38px; margin-bottom:32px; border:1.5px solid rgba(0,0,0,0.05); transition:transform 0.3s ease,box-shadow 0.3s ease; }
+    .art-project:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.05); }
+    .art-project h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; margin-bottom:2px; }
+    .art-project .art-date { font-family:var(--sub-font); font-weight:500; color:var(--text-muted); font-size:0.92rem; margin-bottom:20px; letter-spacing:0.02em; }
+    .art-project .art-label { font-family:var(--sub-font); font-weight:700; font-size:0.78rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin:18px 0 6px; }
+    .art-project .art-label:first-of-type { margin-top:0; }
+    .art-project p { font-size:0.94rem; line-height:1.7; color:var(--text-secondary); }
+    .art-photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; margin-top:20px; }
+    .art-photo-slot { aspect-ratio:1/1; border-radius:14px; border:2px solid rgba(0,0,0,0.06); background:rgba(255,255,255,0.35); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .art-photo-slot:hover { border-color:rgba(0,0,0,0.14); }
+    .art-photo-slot img { width:100%; height:100%; object-fit:cover; border-radius:12px; cursor:pointer; }
 
-    /* ══════════════════════════════════════
-       CODING PROJECTS
-       ══════════════════════════════════════ */
-    .project-card {
-      background: rgba(255,255,255,0.42);
-      border-radius: 18px;
-      padding: 32px 34px;
-      margin-bottom: 28px;
-      border: 1.5px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.06);
-    }
-    .project-card-grid {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 32px;
-      align-items: start;
-    }
-    @media (max-width: 780px) {
-      .project-card-grid { grid-template-columns: 1fr; }
-    }
-    .project-img {
-      width: 100%;
-      border-radius: 12px;
-      border: 2px solid rgba(0,0,0,0.04);
-    }
-    .project-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      margin-bottom: 4px;
-    }
-    .project-card .semester {
-      font-family: var(--sub-font);
-      font-weight: 500;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-      letter-spacing: 0.02em;
-    }
-    .project-card .detail-label,
-    .detail-label {
-      font-family: var(--sub-font);
-      font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin: 16px 0 5px;
-    }
-    .project-card .detail-label:first-of-type { margin-top: 0; }
-    .project-card p {
-      font-size: 0.94rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
+    /* EVENTS */
+    .event-project { background:rgba(255,255,255,0.4); border-radius:20px; padding:36px 38px; margin-bottom:32px; border:1.5px solid rgba(0,0,0,0.05); transition:transform 0.3s ease,box-shadow 0.3s ease; }
+    .event-project:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.05); }
+    .event-project h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; margin-bottom:2px; }
+    .event-project .event-date { font-family:var(--sub-font); font-weight:500; color:var(--text-muted); font-size:0.92rem; margin-bottom:20px; letter-spacing:0.02em; }
+    .event-project .event-label { font-family:var(--sub-font); font-weight:700; font-size:0.78rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin:18px 0 6px; }
+    .event-project .event-label:first-of-type { margin-top:0; }
+    .event-project p { font-size:0.94rem; line-height:1.7; color:var(--text-secondary); }
+    .event-photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px; margin-top:22px; }
+    .event-photo-slot { aspect-ratio:16/10; border-radius:16px; border:2px dashed rgba(0,0,0,0.1); background:rgba(255,255,255,0.35); display:flex; align-items:center; justify-content:center; font-family:var(--sub-font); font-size:0.85rem; color:var(--text-muted); overflow:hidden; }
+    .event-photo-slot:hover { border-color:rgba(0,0,0,0.18); }
+    .event-photo-slot img { width:100%; height:100%; object-fit:cover; border-radius:14px; cursor:pointer; }
 
-    /* Inspiration photo grid */
-    .inspo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 14px;
-      margin-top: 14px;
-    }
-    .inspo-slot {
-      aspect-ratio: 4/3;
-      border-radius: 12px;
-      border: 2px dashed rgba(0,0,0,0.1);
-      background: rgba(255,255,255,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--sub-font);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
-    .inspo-slot:hover { border-color: rgba(0,0,0,0.18); }
-    .inspo-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+    /* FLYER GALLERY */
+    .flyer-section { margin-top:48px; padding-top:40px; border-top:1.5px dashed rgba(0,0,0,0.08); }
+    .flyer-section h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; margin-bottom:6px; }
+    .flyer-section .section-subheading { margin-bottom:22px; }
+    .flyer-grid { display:flex; gap:20px; overflow-x:auto; padding-bottom:12px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+    .flyer-grid::-webkit-scrollbar { height:6px; }
+    .flyer-grid::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.12); border-radius:3px; }
+    .flyer-item { flex:0 0 auto; width:240px; border-radius:14px; border:2px solid rgba(0,0,0,0.06); background:rgba(255,255,255,0.4); overflow:hidden; transition:transform 0.3s ease,box-shadow 0.3s ease; }
+    .flyer-item:hover { transform:translateY(-3px); box-shadow:0 8px 22px rgba(0,0,0,0.07); }
+    .flyer-item img { width:100%; height:auto; display:block; cursor:pointer; }
 
-    /* ══════════════════════════════════════
-       VISUAL ART
-       ══════════════════════════════════════ */
-    .art-project {
-      background: rgba(255,255,255,0.4);
-      border-radius: 20px;
-      padding: 36px 38px;
-      margin-bottom: 32px;
-      border: 1.5px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .art-project:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-    }
-    .art-project h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      margin-bottom: 2px;
-    }
-    .art-project .art-date {
-      font-family: var(--sub-font);
-      font-weight: 500;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 20px;
-      letter-spacing: 0.02em;
-    }
-    .art-project .art-label {
-      font-family: var(--sub-font);
-      font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin: 18px 0 6px;
-    }
-    .art-project .art-label:first-of-type { margin-top: 0; }
-    .art-project p {
-      font-size: 0.94rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-    .art-photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
-      margin-top: 20px;
-    }
-    .art-photo-slot {
-      aspect-ratio: 1/1;
-      border-radius: 14px;
-      border: 2px dashed rgba(0,0,0,0.1);
-      background: rgba(255,255,255,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--sub-font);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
-    .art-photo-slot:hover { border-color: rgba(0,0,0,0.18); }
-    .art-photo-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+    /* CONTACT */
+    .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; max-width:700px; margin:0 auto; }
+    .contact-card { background:rgba(255,255,255,0.5); border-radius:16px; padding:36px 28px; text-align:center; border:1.5px solid rgba(0,0,0,0.05); transition:transform 0.3s ease; }
+    .contact-card:hover { transform:translateY(-3px); }
+    .contact-icon { font-size:2.2rem; margin-bottom:14px; display:block; }
+    .contact-card h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; margin-bottom:8px; }
+    .contact-card a { color:var(--text-secondary); text-decoration:none; font-size:0.95rem; border-bottom:1px dashed var(--pink-accent); transition:color 0.2s; }
+    .contact-card a:hover { color:var(--text-primary); }
+    .contact-card span.val { color:var(--text-secondary); font-size:0.95rem; }
 
-    /* ══════════════════════════════════════
-       EVENT PLANNING
-       ══════════════════════════════════════ */
-    .event-project {
-      background: rgba(255,255,255,0.4);
-      border-radius: 20px;
-      padding: 36px 38px;
-      margin-bottom: 32px;
-      border: 1.5px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .event-project:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-    }
-    .event-project h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      margin-bottom: 2px;
-    }
-    .event-project .event-date {
-      font-family: var(--sub-font);
-      font-weight: 500;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 20px;
-      letter-spacing: 0.02em;
-    }
-    .event-project .event-label {
-      font-family: var(--sub-font);
-      font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin: 18px 0 6px;
-    }
-    .event-project .event-label:first-of-type { margin-top: 0; }
-    .event-project p {
-      font-size: 0.94rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-    .event-photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 18px;
-      margin-top: 22px;
-    }
-    .event-photo-slot {
-      aspect-ratio: 16/10;
-      border-radius: 16px;
-      border: 2px dashed rgba(0,0,0,0.1);
-      background: rgba(255,255,255,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--sub-font);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
-    .event-photo-slot:hover { border-color: rgba(0,0,0,0.18); }
-    .event-photo-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+    .contact-bar { display:flex; justify-content:center; align-items:center; gap:40px; flex-wrap:wrap; padding:20px 28px; border-top:1.5px dashed rgba(0,0,0,0.07); margin-top:auto; border-radius:0 0 22px 22px; background:rgba(255,255,255,0.18); }
+    .contact-bar a,.contact-bar span { font-family:var(--sub-font); font-size:0.88rem; color:var(--text-secondary); text-decoration:none; display:flex; align-items:center; gap:8px; transition:color 0.2s; }
+    .contact-bar a:hover { color:var(--text-primary); }
+    .contact-bar .bar-icon { font-size:1.1rem; }
 
-    /* ══════════════════════════════════════
-       CONTACT (full page)
-       ══════════════════════════════════════ */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .contact-card {
-      background: rgba(255,255,255,0.5);
-      border-radius: 16px;
-      padding: 36px 28px;
-      text-align: center;
-      border: 1.5px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-    }
-    .contact-card:hover { transform: translateY(-3px); }
-    .contact-icon { font-size: 2.2rem; margin-bottom: 14px; display: block; }
-    .contact-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      margin-bottom: 8px;
-    }
-    .contact-card a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.95rem;
-      border-bottom: 1px dashed var(--pink-accent);
-      transition: color 0.2s;
-    }
-    .contact-card a:hover { color: var(--text-primary); }
-    .contact-card span.val { color: var(--text-secondary); font-size: 0.95rem; }
+    .site-footer { text-align:center; padding:28px 20px 24px; font-size:0.78rem; color:var(--text-muted); }
+    .site-footer a { color:var(--text-secondary); }
 
-    /* ══════════════════════════════════════
-       PERSISTENT CONTACT BAR
-       ══════════════════════════════════════ */
-    .contact-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      padding: 20px 28px;
-      border-top: 1.5px dashed rgba(0,0,0,0.07);
-      margin-top: auto;
-      border-radius: 0 0 22px 22px;
-      background: rgba(255,255,255,0.18);
-    }
-    .contact-bar a,
-    .contact-bar span {
-      font-family: var(--sub-font);
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.2s;
-    }
-    .contact-bar a:hover { color: var(--text-primary); }
-    .contact-bar .bar-icon { font-size: 1.1rem; }
+    /* LIGHTBOX */
+    .lightbox-overlay { display:none; position:fixed; inset:0; z-index:99999; background:rgba(0,0,0,0.82); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); align-items:center; justify-content:center; cursor:zoom-out; padding:40px; animation:lbFade 0.25s ease-out; }
+    .lightbox-overlay.open { display:flex; }
+    .lightbox-overlay img { max-width:90vw; max-height:88vh; border-radius:12px; box-shadow:0 12px 60px rgba(0,0,0,0.4); object-fit:contain; animation:lbZoom 0.25s ease-out; }
+    .lightbox-close { position:fixed; top:22px; right:28px; font-size:2rem; color:#fff; background:none; border:none; cursor:pointer; z-index:100000; opacity:0.8; transition:opacity 0.2s; font-family:sans-serif; line-height:1; }
+    .lightbox-close:hover { opacity:1; }
+    @keyframes lbFade { from{opacity:0}to{opacity:1} }
+    @keyframes lbZoom { from{transform:scale(0.92);opacity:0}to{transform:scale(1);opacity:1} }
 
-    /* ── Footer ── */
-    .site-footer {
-      text-align: center;
-      padding: 28px 20px 24px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    .site-footer a { color: var(--text-secondary); }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)} }
+    @keyframes stagger1 { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
+    .stagger { animation:stagger1 0.5s ease-out both; }
+    .stagger:nth-child(1){animation-delay:0.05s} .stagger:nth-child(2){animation-delay:0.12s}
+    .stagger:nth-child(3){animation-delay:0.19s} .stagger:nth-child(4){animation-delay:0.26s}
 
-    /* ── Animations ── */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes stagger1 {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .stagger { animation: stagger1 0.5s ease-out both; }
-    .stagger:nth-child(1) { animation-delay: 0.05s; }
-    .stagger:nth-child(2) { animation-delay: 0.12s; }
-    .stagger:nth-child(3) { animation-delay: 0.19s; }
-    .stagger:nth-child(4) { animation-delay: 0.26s; }
-
-    @media (max-width: 600px) {
-      .header-row { flex-direction: column; gap: 16px; }
-      .site-header { text-align: center; }
-      .tab-btn { padding: 10px 18px; font-size: 0.76rem; }
-      .folder-body { border-radius: 18px; }
-      .contact-bar { gap: 18px; padding: 16px 20px; }
-      .event-photo-grid { grid-template-columns: 1fr; }
+    @media(max-width:600px){
+      .header-row{flex-direction:column;gap:16px} .site-header{text-align:center}
+      .tab-btn{padding:10px 18px;font-size:0.76rem} .folder-body{border-radius:18px}
+      .contact-bar{gap:18px;padding:16px 20px} .event-photo-grid{grid-template-columns:1fr}
+      .flyer-item{width:180px}
     }
   </style>
 </head>
 <body>
 
-<div class="portfolio-shell">
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img id="lightboxImg" src="" alt="Enlarged view">
+</div>
 
+<div class="portfolio-shell">
   <div class="header-row">
     <header class="site-header">
       <h1>Jenna Tumlos</h1>
       <p class="subtitle">engineer · leader · creative</p>
     </header>
-
-    <!-- Bubble Tabs -->
     <nav class="tab-bar" role="tablist">
-      <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">Home & About</button>
+      <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">Home &amp; About</button>
       <button class="tab-btn" data-tab="coding" role="tab" aria-selected="false">Coding Projects</button>
       <button class="tab-btn" data-tab="art" role="tab" aria-selected="false">Visual Art</button>
       <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Event Planning</button>
@@ -619,163 +196,112 @@
   <div class="folder-stack">
     <div class="folder-body" id="folderBody">
 
-      <!-- ═══ HOME & ABOUT ═══ -->
+      <!-- HOME & ABOUT -->
       <div class="tab-page active" id="page-home">
         <h2 class="section-heading">Hello!</h2>
         <p class="section-subheading">a little bit about me</p>
         <div class="about-grid">
-          <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="profile-photo">
+          <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="profile-photo lightbox-trigger">
           <div class="about-text">
-            <p>
-              A creator, engineer, and soon to be USD graduate eager to expand knowledge beyond the classroom. I'm a
-              strong leader and collaborator, innovating creative projects and events for class, clubs, &amp; fun.
-              I'm passionate about promoting diversity and inclusion, building community, and cultivating a culture of unity.
-            </p>
+            <p>A creator, engineer, and soon to be USD graduate eager to expand knowledge beyond the classroom. I'm a strong leader and collaborator, innovating creative projects and events for class, clubs, &amp; fun. I'm passionate about promoting diversity and inclusion, building community, and cultivating a culture of unity.</p>
             <p class="label">Current Leadership Roles</p>
-            <div class="leadership-item">
-              Co-President — Society of Asian Scientists and Engineers (SASE), USD Chapter
-            </div>
-            <div class="leadership-item">
-              President — Association for Computing Machinery (ACM), USD Chapter
-            </div>
-            <div class="leadership-item">
-              Vice President — Fashion Forward at USD
-            </div>
+            <div class="leadership-item">Co-President — Society of Asian Scientists and Engineers (SASE), USD Chapter</div>
+            <div class="leadership-item">President — Association for Computing Machinery (ACM), USD Chapter</div>
+            <div class="leadership-item">Vice President — Fashion Forward at USD</div>
             <div class="fun-fact-area">
               <p class="label" style="margin-bottom:2px;">Interests</p>
-              <div class="interest-item">
-                Filipino Cultural Dance
+              <div>
+                <div class="interest-item">Filipino Cultural Dance</div>
+                <div class="interest-item">Community Building</div>
               </div>
-              <div class="interest-item">
-                Community Building
-              </div>
-              <img src="images/dance2.jpg" alt="Hawaiian Dance: Auana" class="dance-photo">
-              <img src="images/dance1.jpg" alt="Filipino Cultural Dance: Pandanggo sa Ilaw" class="dance-photo">
+              <img src="images/dance2.jpg" alt="Hawaiian Dance: Auana" class="dance-photo lightbox-trigger">
+              <img src="images/dance1.jpg" alt="Filipino Cultural Dance: Pandanggo sa Ilaw" class="dance-photo lightbox-trigger">
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ CODING PROJECTS ═══ -->
+      <!-- CODING PROJECTS -->
       <div class="tab-page" id="page-coding">
-
         <h2 class="section-heading">Creative Coding Projects</h2>
-
         <div class="project-card stagger">
           <div class="project-card-grid">
-            <img src="images/SolarCenter_Start.png" alt="Demo of Solar Center App" class="project-img">
+            <img src="images/SolarCenter_Start.png" alt="Demo of Solar Center App" class="project-img lightbox-trigger">
             <div>
               <h3>Solar Center</h3>
               <p class="semester">Spring 2024 · Creative Algorithms</p>
               <p class="detail-label">Description</p>
-              <p>
-                SOLAR CENTER is a simple and personalizable meditation guide that aims to help balance hectic lifestyles
-                with mindfulness through breathwork and exercising creativity.
-              </p>
+              <p>SOLAR CENTER is a simple and personalizable meditation guide that aims to help balance hectic lifestyles with mindfulness through breathwork and exercising creativity.</p>
               <p class="detail-label">Motivation</p>
-              <p>
-                As life grew busier than before, balancing so many responsibilities led me to forget the
-                importance in self care and taking breaks. I wanted to create a design/visual/process that could focus my
-                attention at something almost hypnotizing to relax hyper minds.
-              </p>
+              <p>As life grew busier than before, balancing so many responsibilities led me to forget the importance in self care and taking breaks. I wanted to create a design/visual/process that could focus my attention at something almost hypnotizing to relax hyper minds.</p>
               <p class="detail-label">Inspiration</p>
-              <p>
-                Seeing an 80s design of a pixelated horizon amidst finals season, I felt there was quite a peaceful tone
-                to the simplicity of the graphic. I thought the style could be an interesting take on a meditation guide,
-                contrasting yet oddly coinciding with the calming aspects of meditation.
-              </p>
+              <p>Seeing an 80s design of a pixelated horizon amidst finals season, I felt there was quite a peaceful tone to the simplicity of the graphic. I thought the style could be an interesting take on a meditation guide, contrasting yet oddly coinciding with the calming aspects of meditation.</p>
               <p class="detail-label">Design &amp; Implementation</p>
-              <p>
-                The app was built in Java using the Processing library. It features a dynamic horizon that expands and
-                contracts with the user's breath, a timer for meditation sessions, and customizable color schemes. I
-                focused on creating smooth animations and an intuitive interface to enhance the user experience.
-              </p>
+              <p>The app was built in Java using the Processing library. It features a dynamic horizon that expands and contracts with the user's breath, a timer for meditation sessions, and customizable color schemes. I focused on creating smooth animations and an intuitive interface to enhance the user experience.</p>
             </div>
           </div>
           <p class="detail-label" style="margin-top:28px;">Inspiration &amp; Process</p>
           <div class="inspo-grid">
-            <div class="inspo-slot"><img src="images/80s.png" alt="inspiration graphic" class="project-img"></div>
-            <div class="inspo-slot"><img src="images/sc_field.png" alt="field screenshot" class="project-img"></div>
-            <div class="inspo-slot"><img src="images/sc_breathein.png" alt="breath in screenshot" class="project-img"></div>
-            <div class="inspo-slot"><img src="images/sc_holdbreath.png" alt="hold breath screenshot" class="project-img"></div>
+            <div class="inspo-slot"><img src="images/80s.png" alt="Inspiration graphic" class="lightbox-trigger"></div>
+            <div class="inspo-slot"><img src="images/sc_field.png" alt="Field screenshot" class="lightbox-trigger"></div>
+            <div class="inspo-slot"><img src="images/sc_breathein.png" alt="Breathe in screenshot" class="lightbox-trigger"></div>
+            <div class="inspo-slot"><img src="images/sc_holdbreath.png" alt="Hold breath screenshot" class="lightbox-trigger"></div>
           </div>
         </div>
 
         <hr class="divider">
-
         <h2 class="section-heading">Class Coding Projects</h2>
 
         <div class="project-card stagger">
           <div class="project-card-grid">
-            <img src="images/timely_demo.png" alt="Demo of Timely App" class="project-img">
+            <img src="images/timely_demo.png" alt="Demo of Timely App" class="project-img lightbox-trigger">
             <div>
               <h3>Timely App</h3>
               <p class="semester">Spring 2025 · Object Oriented Programming</p>
               <p class="detail-label">Description</p>
-              <p>
-                Timely is an interactive app for organizing events and tasks in a planner. It provides a simple calendar view
-                for all-day events and time blocks, plus a unique progress chart that visualizes your task completion in real time.
-              </p>
+              <p>Timely is an interactive app for organizing events and tasks in a planner. It provides a simple calendar view for all-day events and time blocks, plus a unique progress chart that visualizes your task completion in real time.</p>
               <p class="detail-label">Motivation</p>
-              <p>
-                Time management is a skill I've been working on to balance personal and school life. After trying multiple planners,
-                I couldn't find one with everything I needed — so I built my own.
-              </p>
+              <p>Time management is a skill I've been working on to balance personal and school life. After trying multiple planners, I couldn't find one with everything I needed — so I built my own.</p>
               <p class="detail-label">Design &amp; Implementation</p>
-              <p>
-                The back-end follows the MVC pattern with Observer and Facade patterns. I implemented the To Do List and Progress Chart
-                components, while my partner implemented the calendar. Together, we completed a full code cleanup to ensure all lines were relevant and optimized.
-              </p>
+              <p>The back-end follows the MVC pattern with Observer and Facade patterns. I implemented the To Do List and Progress Chart components, while my partner implemented the calendar. Together, we completed a full code cleanup to ensure all lines were relevant and optimized.</p>
             </div>
           </div>
         </div>
 
         <div class="project-card stagger">
           <div class="project-card-grid">
-            <img src="images/elevator.jpeg" alt="Elevator Simulator" class="project-img">
+            <img src="images/elevator.jpeg" alt="Elevator Simulator" class="project-img lightbox-trigger">
             <div>
               <h3>Elevator Simulator</h3>
               <p class="semester">Spring 2025 · Object Oriented Programming</p>
               <p class="detail-label">Description</p>
-              <p>
-                A simulator program mocking different elevator types that service a building. Each elevator bas unique behaviors and a scheduler
-                to determine which elevator answers each call.
-              </p>
+              <p>A simulator program mocking different elevator types that service a building. Each elevator has unique behaviors and a scheduler to determine which elevator answers each call.</p>
               <p class="detail-label">Motivation</p>
               <p>Learn to develop a program using Test Driven Development and Object Oriented Principles.</p>
               <p class="detail-label">Design &amp; Implementation</p>
-              <p>
-                We used interfaces for Elevators and Schedulers for uniformity. I implemented the Express and Freight elevator
-                classes, the Complex Scheduler, and contributed to the Simulator class — all with comprehensive tests.
-              </p>
+              <p>We used interfaces for Elevators and Schedulers for uniformity. I implemented the Express and Freight elevator classes, the Complex Scheduler, and contributed to the Simulator class — all with comprehensive tests.</p>
             </div>
           </div>
         </div>
 
         <div class="project-card stagger">
           <div class="project-card-grid">
-            <img src="images/bday_paradox.png" alt="Birthday Paradox Graph" class="project-img">
+            <img src="images/bday_paradox.png" alt="Birthday Paradox Graph" class="project-img lightbox-trigger">
             <div>
               <h3>Birthday Paradox</h3>
               <p class="semester">Spring 2025 · Object Oriented Programming</p>
               <p class="detail-label">Description</p>
-              <p>
-                Runs the "Birthday Paradox" experiment, calculating the probability of at least two people in the same
-                room sharing a birthday.
-              </p>
+              <p>Runs the "Birthday Paradox" experiment, calculating the probability of at least two people in the same room sharing a birthday.</p>
               <p class="detail-label">Motivation</p>
               <p>Focus on writing clean code and efficient tests using Mockito.</p>
               <p class="detail-label">Design &amp; Implementation</p>
-              <p>
-                The Simulation class runs groups of 5 to 100 people. I implemented the Simulation, Trial, and Experiment classes
-                along with their tests.
-              </p>
+              <p>The Simulation class runs groups of 5 to 100 people. I implemented the Simulation, Trial, and Experiment classes along with their tests.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ VISUAL ART ═══ -->
+      <!-- VISUAL ART -->
       <div class="tab-page" id="page-art">
         <h2 class="section-heading">Visual Art Projects</h2>
 
@@ -783,37 +309,28 @@
           <h3>Untitled</h3>
           <p class="art-date">March 2026 · Relief Reduction</p>
           <p class="art-label">Ideation &amp; Inspiration</p>
-          <p>My grandmother had told me a story that when she was young, about 4 or 5 years old, she walked home in the Philippines with her carabou passing a cave. In the cave 
-            she saw golden eyes of a tiger staring at her, and she ran home in fear. I wanted to imagine the moment she saw those eyes in curiosity. 
-          </p>
+          <p>My grandmother had told me a story that when she was young, about 4 or 5 years old, she walked home in the Philippines with her carabou passing a cave. In the cave she saw golden eyes of a tiger staring at her, and she ran home in fear. I wanted to imagine the moment she saw those eyes in curiosity.</p>
           <p class="art-label">Learning Outcomes</p>
-          <p>With this being my first time doing a relief reduction, I learned a great deal how to listen to the ink and the printing press. 
-            Along the way I made many mistakes, but learned how to muse the materials to my advantage. I also learned how to be more patient and meticulous, as the process of relief reduction is very unforgiving and requires a lot of attention to detail.
-          </p>
+          <p>With this being my first time doing a relief reduction, I learned a great deal how to listen to the ink and the printing press. Along the way I made many mistakes, but learned how to use the materials to my advantage. I also learned how to be more patient and meticulous, as the process of relief reduction is very unforgiving and requires a lot of attention to detail.</p>
           <div class="art-photo-grid">
-            <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Relief image" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Relief image" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Relief image" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Relief image" class="project-img"></div>
+            <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Relief print layer 1" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Relief print layer 2" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Relief print layer 3" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Relief print final" class="lightbox-trigger"></div>
           </div>
         </div>
 
         <div class="art-project stagger">
-          <h3>Conceptual Film Poster for "Eternal Sushine of the Spotless Minds"</h3>
+          <h3>Conceptual Film Poster for "Eternal Sunshine of the Spotless Mind"</h3>
           <p class="art-date">December 2025 · InDesign</p>
           <p class="art-label">Ideation &amp; Inspiration</p>
-          <p>Loving someone is a beautiful feeling, sharing every moment thinking about each memory together. Being in love could
-          also lead to the possibility of a heartbreak, a feeling of pain and misery being left with only the memories of a past
-          reality. In the beginning, Joel and Clementine’s relationship felt natural and destined. Their opposite personalities
-          led to an unbeatable chemistry. The film invokes mood switches from excitement to frustration and hope to devastation
-          which feels neverending. To consider the opportunity of erasing someone dear from your memory is outrageous and we, as
-          viewers, see Joel go through these stages of succumbing to the struggle of dealing with a single thought of Clementine.
-          </p>
+          <p>Loving someone is a beautiful feeling, sharing every moment thinking about each memory together. Being in love could also lead to the possibility of a heartbreak, a feeling of pain and misery being left with only the memories of a past reality. In the beginning, Joel and Clementine's relationship felt natural and destined. Their opposite personalities led to an unbeatable chemistry. The film invokes mood switches from excitement to frustration and hope to devastation which feels neverending. To consider the opportunity of erasing someone dear from your memory is outrageous and we, as viewers, see Joel go through these stages of succumbing to the struggle of dealing with a single thought of Clementine.</p>
           <div class="art-photo-grid">
-            <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Relief image" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Relief image" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Relief image" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Relief image" class="project-img"></div>
+            <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Poster concept 1" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Poster concept 2" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Poster concept 3" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Poster final" class="lightbox-trigger"></div>
+          </div>
         </div>
 
         <div class="art-project stagger">
@@ -822,22 +339,15 @@
           <p class="art-label">Goal</p>
           <p>Alter a book using its contents to reimagine a new meaning.</p>
           <p class="art-label">Ideation &amp; Inspiration</p>
-          <p> The heart of many cultures is food. I decided to lean on my personal perspective of 
-            being an Asian American and the cultural significance of food in my family. I wanted to explore the idea of food as a form of love 
-            and care, and how it connects to my identity and relationships. The question "Did you eat yet?" is often a masked expression of care and 
-            concern in many Asian cultures though rarely is it directly said. I wanted to bring that question to the forefront and explore the deeper meanings behind it through 
-            this book, "New American Cooking Methods and Definitions".
-          </p>
+          <p>The heart of many cultures is food. I decided to lean on my personal perspective of being an Asian American and the cultural significance of food in my family. I wanted to explore the idea of food as a form of love and care, and how it connects to my identity and relationships. The question "Did you eat yet?" is often a masked expression of care and concern in many Asian cultures though rarely is it directly said. I wanted to bring that question to the forefront and explore the deeper meanings behind it through this book, "New American Cooking Methods and Definitions".</p>
           <p class="art-label">Learning Outcomes</p>
-          <p>Bookmaking is something very precise and personal. The intention of the colors, type fonts, and size of the book all contribute 
-            to its larger truth and deeper meaning. Taking this class and learning these methods helped me further appreciate the smallest details 
-          and make decisions carefully.</p>
+          <p>Bookmaking is something very precise and personal. The intention of the colors, type fonts, and size of the book all contribute to its larger truth and deeper meaning. Taking this class and learning these methods helped me further appreciate the smallest details and make decisions carefully.</p>
           <div class="art-photo-grid">
-            <div class="art-photo-slot"><img src="images/IMG_6736.JPG" alt="book1" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6737.jpg" alt="book2" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6739.jpg" alt="book3" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6740.jpg" alt="book4" class="project-img"></div>
-            <div class="art-photo-slot"><img src="images/IMG_6744.jpg" alt="book5" class="project-img"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6736.JPG" alt="Book page 1" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6737.jpg" alt="Book page 2" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6739.jpg" alt="Book page 3" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6740.jpg" alt="Book page 4" class="lightbox-trigger"></div>
+            <div class="art-photo-slot"><img src="images/IMG_6744.jpg" alt="Book page 5" class="lightbox-trigger"></div>
           </div>
         </div>
 
@@ -846,16 +356,14 @@
           <p class="art-date">2024 · Digital</p>
           <p class="art-label">Ideation &amp; Inspiration</p>
           <p>The struggle of getting code to work is frustrating sometimes, and even when things don't seem right at all I still press the run button hoping something new will happen.</p>
-          <p>I created this design from frustration and sillyness, wanting to express a creative side to myself that had been suppressed 
-            by the logical side. After finding out it won the annual sticker competition, it lifted my spirits
-             knowing that other students felt the same way in this major. </p>
+          <p>I created this design from frustration and silliness, wanting to express a creative side to myself that had been suppressed by the logical side. After finding out it won the annual sticker competition, it lifted my spirits knowing that other students felt the same way in this major.</p>
           <div class="art-photo-grid">
-            <div class="art-photo-slot"></div><img src="images/cs_sticker.png" alt="Sticker design of a computer on fire" class="art-project-img"></div>
+            <div class="art-photo-slot"><img src="images/cs_sticker.png" alt="Sticker design of a computer on fire" class="lightbox-trigger"></div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ EVENT PLANNING ═══ -->
+      <!-- EVENT PLANNING -->
       <div class="tab-page" id="page-events">
         <h2 class="section-heading">Event Planning Projects</h2>
         <p class="section-subheading">organizing moments that bring people together</p>
@@ -901,9 +409,22 @@
             <div class="event-photo-slot">+ add photo</div>
           </div>
         </div>
+
+        <!-- FLYER GALLERY -->
+        <div class="flyer-section">
+          <h3>Flyers I Designed</h3>
+          <p class="section-subheading">event graphics &amp; promotional materials</p>
+          <div class="flyer-grid">
+            <div class="flyer-item"><img src="images/flyer1.png" alt="Event flyer 1" class="lightbox-trigger"></div>
+            <div class="flyer-item"><img src="images/flyer2.png" alt="Event flyer 2" class="lightbox-trigger"></div>
+            <div class="flyer-item"><img src="images/flyer3.png" alt="Event flyer 3" class="lightbox-trigger"></div>
+            <div class="flyer-item"><img src="images/flyer4.png" alt="Event flyer 4" class="lightbox-trigger"></div>
+            <div class="flyer-item"><img src="images/flyer5.png" alt="Event flyer 5" class="lightbox-trigger"></div>
+          </div>
+        </div>
       </div>
 
-      <!-- ═══ CONTACT (full page) ═══ -->
+      <!-- CONTACT -->
       <div class="tab-page" id="page-contact">
         <h2 class="section-heading" style="text-align:center;">Get in Touch</h2>
         <p class="section-subheading" style="text-align:center;">I'd love to hear from you</p>
@@ -924,59 +445,67 @@
       <!-- Persistent Contact Bar -->
       <div class="contact-bar">
         <span><span class="bar-icon">✉️</span> jtumlos@sandiego.edu</span>
-        <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener">
-          <span class="bar-icon">💼</span> LinkedIn
-        </a>
+        <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener"><span class="bar-icon">💼</span> LinkedIn</a>
       </div>
-
     </div>
   </div>
 
   <footer class="site-footer">
-    <p>
-      Copyright &copy; <script>document.write(new Date().getFullYear());</script> Jenna Tumlos. All rights reserved
-      | Built on a template by <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a>
-    </p>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Jenna Tumlos. All rights reserved | Built on a template by <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a></p>
   </footer>
-
 </div>
 
 <script>
+  // Tab switching
   const tabBtns = document.querySelectorAll('.tab-btn');
   const pages = document.querySelectorAll('.tab-page');
   const folderBody = document.getElementById('folderBody');
-
   const colorMap = {
-    home:    { bg: 'var(--yellow)',  border: 'var(--yellow-accent)'  },
-    coding:  { bg: 'var(--blue)',    border: 'var(--blue-accent)'    },
-    art:     { bg: 'var(--purple)',  border: 'var(--purple-accent)'  },
-    events:  { bg: 'var(--indigo)',  border: 'var(--indigo-accent)'  },
-    contact: { bg: 'var(--pink)',    border: 'var(--pink-accent)'    },
+    home:   {bg:'var(--yellow)',border:'var(--yellow-accent)'},
+    coding: {bg:'var(--blue)',border:'var(--blue-accent)'},
+    art:    {bg:'var(--purple)',border:'var(--purple-accent)'},
+    events: {bg:'var(--indigo)',border:'var(--indigo-accent)'},
+    contact:{bg:'var(--pink)',border:'var(--pink-accent)'},
   };
-
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
-
-      tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
       btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-
+      btn.setAttribute('aria-selected','true');
       pages.forEach(p => p.classList.remove('active'));
-      document.getElementById('page-' + tab).classList.add('active');
-
-      const colors = colorMap[tab];
-      folderBody.style.background = colors.bg;
-      folderBody.style.borderColor = colors.border;
-
-      // Re-trigger stagger
-      const cards = document.querySelectorAll('#page-' + tab + ' .stagger');
-      cards.forEach(c => { c.style.animation = 'none'; void c.offsetHeight; c.style.animation = ''; });
-
-      folderBody.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('page-'+tab).classList.add('active');
+      const c = colorMap[tab];
+      folderBody.style.background = c.bg;
+      folderBody.style.borderColor = c.border;
+      const cards = document.querySelectorAll('#page-'+tab+' .stagger');
+      cards.forEach(el => { el.style.animation='none'; void el.offsetHeight; el.style.animation=''; });
+      folderBody.scrollIntoView({behavior:'smooth',block:'start'});
     });
   });
-</script>
 
+  // Lightbox
+  const overlay = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbClose = document.getElementById('lightboxClose');
+
+  document.addEventListener('click', e => {
+    const trigger = e.target.closest('.lightbox-trigger');
+    if (trigger && trigger.tagName === 'IMG') {
+      lbImg.src = trigger.src;
+      lbImg.alt = trigger.alt;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  function closeLightbox() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+  lbClose.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 </body>
 </html>
