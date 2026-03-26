@@ -525,20 +525,39 @@
 
       <!-- CV -->
       <div class="tab-page" id="page-cv">
-        <h2 class="section-heading">Work Experience</h2>
+        <h2 class="section-heading">Curriculum Vitae</h2>
+        <p class="section-subheading">work experience &amp; professional roles</p>
 
         <div class="cv-job stagger">
-          <h3>Marketing Intern / Software Development Intern</h3>
-          <p class="cv-company">daisy.so</p>
-          <p class="cv-date">July 2025 — Present</p>
+          <h3>Job Title</h3>
+          <p class="cv-company">Company / Organization</p>
+          <p class="cv-date">Month Year — Present</p>
           <ul>
-            <li>Collaborated with the marketing team to develop branded visual content aligned with campaign objectives to 
-              maintain a consistent brand voice across all social media platforms including Instagram and TikTok.
-            </li>
-            <li>Supported campaign execution from concept development to publishing to expand engagement.</li>
-            <li>Developed and built an automated desk reservation system to deliver a seamless user expeirence and improve day to day 
-              operational efficiency.
-            </li>
+            <li>Describe a key responsibility or accomplishment in this role</li>
+            <li>Another bullet about what you contributed, built, or learned</li>
+            <li>Quantify impact where possible (e.g. "Organized 5 events reaching 200+ attendees")</li>
+          </ul>
+        </div>
+
+        <div class="cv-job stagger">
+          <h3>Job Title</h3>
+          <p class="cv-company">Company / Organization</p>
+          <p class="cv-date">Month Year — Month Year</p>
+          <ul>
+            <li>Describe a key responsibility or accomplishment in this role</li>
+            <li>Another bullet about what you contributed, built, or learned</li>
+            <li>Quantify impact where possible</li>
+          </ul>
+        </div>
+
+        <div class="cv-job stagger">
+          <h3>Job Title</h3>
+          <p class="cv-company">Company / Organization</p>
+          <p class="cv-date">Month Year — Month Year</p>
+          <ul>
+            <li>Describe a key responsibility or accomplishment in this role</li>
+            <li>Another bullet about what you contributed, built, or learned</li>
+            <li>Quantify impact where possible</li>
           </ul>
         </div>
       </div>
@@ -619,4 +638,13 @@
     }
   });
   function closeLightbox() {
-    ov
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+  lbClose.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
