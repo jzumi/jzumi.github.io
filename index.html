@@ -13,6 +13,7 @@
       --purple: #E8DCED; --purple-dark: #D9C9E2; --purple-accent: #C0A8D0;
       --indigo: #D5D5F0; --indigo-dark: #C2C2E6; --indigo-accent: #A5A5D4;
       --pink: #f1e0e6; --pink-dark: #F3CFDA; --pink-accent: #E8A8BD;
+      --sage: #DCE8D8; --sage-dark: #C9DBC4; --sage-accent: #A8C4A0;
       --text-primary: #2D2A32; --text-secondary: #5C5666; --text-muted: #8A8394;
       --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
       --sub-font: 'Radnika Next', 'Instrument Sans', sans-serif;
@@ -39,6 +40,7 @@
     .tab-btn[data-tab="coding"] {--tab-bg:var(--blue);--tab-border:var(--blue-accent)}
     .tab-btn[data-tab="art"]    {--tab-bg:var(--purple);--tab-border:var(--purple-accent)}
     .tab-btn[data-tab="events"] {--tab-bg:var(--indigo);--tab-border:var(--indigo-accent)}
+    .tab-btn[data-tab="cv"] {--tab-bg:var(--sage);--tab-border:var(--sage-accent)}
     .tab-btn[data-tab="contact"]{--tab-bg:var(--pink);--tab-border:var(--pink-accent)}
     .tab-btn.active { background:var(--tab-bg); border-color:var(--tab-border); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
     @keyframes floatBubble { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
@@ -47,6 +49,7 @@
     .tab-btn:nth-child(3){animation:floatBubble 3.8s ease-in-out infinite;animation-delay:.8s}
     .tab-btn:nth-child(4){animation:floatBubble 4.2s ease-in-out infinite;animation-delay:1.2s}
     .tab-btn:nth-child(5){animation:floatBubble 4.6s ease-in-out infinite;animation-delay:.6s}
+    .tab-btn:nth-child(6){animation:floatBubble 4.3s ease-in-out infinite;animation-delay:1s}
     .tab-btn:hover,.tab-btn.active{animation-play-state:paused}
 
     .folder-body { background:var(--yellow); border:2px solid var(--yellow-accent); border-radius:24px; min-height:600px; position:relative; z-index:5; box-shadow:var(--shadow-soft),0 10px 40px rgba(0,0,0,0.05); transition:background 0.45s ease,border-color 0.45s ease; display:flex; flex-direction:column; }
@@ -118,6 +121,18 @@
     .event-photo-slot img { width:100%; height:100%; object-fit:cover; border-radius:14px; cursor:pointer; }
 
     /* FLYER GALLERY */
+
+    /* CV */
+    .cv-job { background:rgba(255,255,255,0.42); border-radius:18px; padding:32px 34px; margin-bottom:24px; border:1.5px solid rgba(0,0,0,0.05); transition:transform 0.3s ease,box-shadow 0.3s ease; }
+    .cv-job:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.05); }
+    .cv-job h3 { font-family:'DM Serif Display',serif; font-size:1.35rem; margin-bottom:2px; }
+    .cv-job .cv-company { font-family:var(--sub-font); font-weight:600; font-size:0.95rem; color:var(--text-secondary); margin-bottom:2px; }
+    .cv-job .cv-date { font-family:var(--sub-font); font-weight:500; color:var(--text-muted); font-size:0.88rem; margin-bottom:16px; letter-spacing:0.02em; }
+    .cv-job ul { padding-left:20px; margin:0; }
+    .cv-job li { font-size:0.94rem; line-height:1.7; color:var(--text-secondary); margin-bottom:8px; }
+    .cv-job li:last-child { margin-bottom:0; }
+
+    /* FLYER GALLERY (original comment restored) */
     .flyer-section { margin-top:48px; padding-top:40px; border-top:1.5px dashed rgba(0,0,0,0.08); }
     .flyer-section h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; margin-bottom:6px; }
     .flyer-section .section-subheading { margin-bottom:22px; }
@@ -189,6 +204,7 @@
       <button class="tab-btn" data-tab="coding" role="tab" aria-selected="false">Coding Projects</button>
       <button class="tab-btn" data-tab="art" role="tab" aria-selected="false">Visual Art</button>
       <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Event Planning</button>
+      <button class="tab-btn" data-tab="cv" role="tab" aria-selected="false">CV</button>
       <button class="tab-btn" data-tab="contact" role="tab" aria-selected="false">Contact Me</button>
     </nav>
   </div>
@@ -507,6 +523,45 @@
         </div>
       </div>
 
+      <!-- CV -->
+      <div class="tab-page" id="page-cv">
+        <h2 class="section-heading">Curriculum Vitae</h2>
+        <p class="section-subheading">work experience &amp; professional roles</p>
+
+        <div class="cv-job stagger">
+          <h3>Job Title</h3>
+          <p class="cv-company">Company / Organization</p>
+          <p class="cv-date">Month Year — Present</p>
+          <ul>
+            <li>Describe a key responsibility or accomplishment in this role</li>
+            <li>Another bullet about what you contributed, built, or learned</li>
+            <li>Quantify impact where possible (e.g. "Organized 5 events reaching 200+ attendees")</li>
+          </ul>
+        </div>
+
+        <div class="cv-job stagger">
+          <h3>Job Title</h3>
+          <p class="cv-company">Company / Organization</p>
+          <p class="cv-date">Month Year — Month Year</p>
+          <ul>
+            <li>Describe a key responsibility or accomplishment in this role</li>
+            <li>Another bullet about what you contributed, built, or learned</li>
+            <li>Quantify impact where possible</li>
+          </ul>
+        </div>
+
+        <div class="cv-job stagger">
+          <h3>Job Title</h3>
+          <p class="cv-company">Company / Organization</p>
+          <p class="cv-date">Month Year — Month Year</p>
+          <ul>
+            <li>Describe a key responsibility or accomplishment in this role</li>
+            <li>Another bullet about what you contributed, built, or learned</li>
+            <li>Quantify impact where possible</li>
+          </ul>
+        </div>
+      </div>
+
       <!-- CONTACT -->
       <div class="tab-page" id="page-contact">
         <h2 class="section-heading" style="text-align:center;">Get in Touch</h2>
@@ -515,7 +570,7 @@
           <div class="contact-card">
             <span class="contact-icon">✉️</span>
             <h3>Email</h3>
-            <span class="val">jtumlos@sandiego.edu</span>
+            <span class="val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6bca2a3bbbab9a596a5b7b8b2bfb3b1b9f8b3b2a3">[email&#160;protected]</a></span>
           </div>
           <div class="contact-card">
             <span class="contact-icon">💼</span>
@@ -527,14 +582,14 @@
 
       <!-- Persistent Contact Bar -->
       <div class="contact-bar">
-        <span><span class="bar-icon">✉️</span> jtumlos@sandiego.edu</span>
+        <span><span class="bar-icon">✉️</span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e140a0b1312110d3e0d1f101a171b1911501b1a0b">[email&#160;protected]</a></span>
         <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener"><span class="bar-icon">💼</span> LinkedIn</a>
       </div>
     </div>
   </div>
 
   <footer class="site-footer">
-    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Jenna Tumlos. All rights reserved | Built on a template by <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a></p>
+    <p>Copyright &copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Jenna Tumlos. All rights reserved | Built on a template by <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a></p>
   </footer>
 </div>
 
@@ -548,6 +603,7 @@
     coding: {bg:'var(--blue)',border:'var(--blue-accent)'},
     art:    {bg:'var(--purple)',border:'var(--purple-accent)'},
     events: {bg:'var(--indigo)',border:'var(--indigo-accent)'},
+    cv:     {bg:'var(--sage)',border:'var(--sage-accent)'},
     contact:{bg:'var(--pink)',border:'var(--pink-accent)'},
   };
   tabBtns.forEach(btn => {
@@ -582,13 +638,4 @@
     }
   });
   function closeLightbox() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    lbImg.src = '';
-  }
-  lbClose.addEventListener('click', closeLightbox);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-</script>
-</body>
-</html>
+    ov
