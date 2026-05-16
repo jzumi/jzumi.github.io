@@ -1,533 +1,1331 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jenna Tumlos — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    :root{
-      --navy:#074a87;--blue-dark:#175593;--blue-mid:#5492c7;
-      --blue-light:#74a7d4;--blue-pale:#8dc8ef;--ice:#f1fbfd;
-      --text-primary:#0a2e52;--text-secondary:#2a5a8a;--text-muted:#6a9cc8;
-      --heading:'DM Serif Display',serif;--body:'Instrument Sans',sans-serif;
-      --accent:'Cormorant Garamond',serif;
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
     }
-    html{scroll-behavior:smooth}
-    body{font-family:var(--body);color:var(--text-primary);background:var(--ice);overflow-x:hidden}
+
+    :root {
+      --navy: #074a87;
+      --blue-dark: #175593;
+      --blue-mid: #5492c7;
+      --blue-light: #74a7d4;
+      --blue-pale: #8dc8ef;
+      --ice: #f1fbfd;
+      --text-primary: #0a2e52;
+      --text-secondary: #2a5a8a;
+      --text-muted: #6a9cc8;
+      --heading: 'DM Serif Display', serif;
+      --body: 'Instrument Sans', sans-serif;
+      --accent: 'Cormorant Garamond', serif;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: var(--body);
+      color: var(--text-primary);
+      background: var(--ice);
+      overflow-x: hidden
+    }
 
     /* Yuri background */
-    body::before{
-      content:'';position:fixed;inset:0;z-index:0;
-      background:url('images/yuri.jpg') center/cover no-repeat fixed;
-      opacity:0.18;pointer-events:none;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: url('images/yuri.jpg') center/cover no-repeat fixed;
+      opacity: 0.18;
+      pointer-events: none;
     }
+
     /* Grain */
-    body::after{content:'';position:fixed;inset:0;z-index:99998;pointer-events:none;opacity:0.12;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      background-size:180px;}
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 180px;
+    }
 
     /* All content above background */
-    .top-nav,section,.section-full,.hero,.contact-footer,.lightbox-overlay{position:relative;z-index:1;}
+    .top-nav,
+    section,
+    .section-full,
+    .hero,
+    .contact-footer,
+    .lightbox-overlay {
+      position: relative;
+      z-index: 1;
+    }
 
     /* ══════ NAV ══════ */
-    .top-nav{
-      position:fixed;top:0;left:0;right:0;z-index:1000;
-      display:flex;justify-content:center;align-items:center;gap:clamp(16px,3.5vw,44px);
-      padding:16px 28px;
-      background:rgba(241,251,253,0.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(23,85,147,0.07);transition:box-shadow 0.3s;
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(16px, 3.5vw, 44px);
+      padding: 16px 28px;
+      background: rgba(241, 251, 253, 0.8);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(23, 85, 147, 0.07);
+      transition: box-shadow 0.3s;
     }
-    .top-nav.scrolled{box-shadow:0 2px 20px rgba(7,74,135,0.08)}
-    .top-nav .nav-name{font-family:var(--heading);font-size:1.1rem;color:var(--navy);text-decoration:none;margin-right:auto;}
-    .top-nav a.nav-link{
-      font-family:var(--accent);font-weight:600;font-size:0.92rem;
-      color:var(--blue-mid);text-decoration:none;letter-spacing:0.03em;position:relative;transition:color 0.25s;
+
+    .top-nav.scrolled {
+      box-shadow: 0 2px 20px rgba(7, 74, 135, 0.08)
     }
-    .top-nav a.nav-link:hover{color:var(--navy)}
-    .top-nav a.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--navy);transition:width 0.3s}
-    .top-nav a.nav-link:hover::after{width:100%}
+
+    .top-nav .nav-name {
+      font-family: var(--heading);
+      font-size: 1.1rem;
+      color: var(--navy);
+      text-decoration: none;
+      margin-right: auto;
+    }
+
+    .top-nav a.nav-link {
+      font-family: var(--accent);
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--blue-mid);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      position: relative;
+      transition: color 0.25s;
+    }
+
+    .top-nav a.nav-link:hover {
+      color: var(--navy)
+    }
+
+    .top-nav a.nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--navy);
+      transition: width 0.3s
+    }
+
+    .top-nav a.nav-link:hover::after {
+      width: 100%
+    }
 
     /* ══════ HERO ══════ */
-    .hero{
-      min-height:100vh;display:flex;align-items:flex-end;
-      position:relative;overflow:hidden;
-      background:linear-gradient(160deg,rgba(241,251,253,0.92) 0%,rgba(218,237,248,0.88) 40%,rgba(196,223,242,0.85) 100%);
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, rgba(241, 251, 253, 0.92) 0%, rgba(218, 237, 248, 0.88) 40%, rgba(196, 223, 242, 0.85) 100%);
     }
-    .hero-inner{
-      width:100%;display:flex;align-items:flex-end;
-      padding:0 0 0 clamp(28px,5vw,80px);
-      position:relative;z-index:2;
+
+    .hero-inner {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 0 0 clamp(28px, 5vw, 80px);
+      position: relative;
+      z-index: 2;
     }
-    .hero-left{
-      display:flex;align-items:flex-end;gap:clamp(20px,3vw,40px);
-      padding-bottom:clamp(60px,10vh,120px);padding-top:120px;
-      flex-shrink:0;
+
+    .hero-left {
+      display: flex;
+      align-items: flex-end;
+      gap: clamp(20px, 3vw, 40px);
+      padding-bottom: clamp(60px, 10vh, 120px);
+      padding-top: 120px;
+      flex-shrink: 0;
     }
 
     /* Jack of Hearts playing card */
-    .card-frame{
-      width:clamp(140px,14vw,200px);height:clamp(210px,21vw,300px);
-      border-radius:12px;position:relative;flex-shrink:0;
-      background:#fff;border:2px solid var(--navy);
-      box-shadow:0 6px 30px rgba(7,74,135,0.15);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
-    }
-    .card-frame::before,.card-frame::after{
-      position:absolute;font-family:var(--heading);color:#c0392b;z-index:3;line-height:1;
-    }
-    .card-frame::before{content:'J\A♥';white-space:pre;top:8px;left:10px;font-size:clamp(0.7rem,1.2vw,1rem);text-align:center;}
-    .card-frame::after{content:'J\A♥';white-space:pre;bottom:8px;right:10px;font-size:clamp(0.7rem,1.2vw,1rem);text-align:center;transform:rotate(180deg);}
-    .card-inner-border{
-      position:absolute;inset:6px;border:1px solid rgba(7,74,135,0.15);border-radius:8px;z-index:2;pointer-events:none;
-    }
-    .card-hearts{
-      position:absolute;z-index:2;pointer-events:none;color:#c0392b;opacity:0.12;
-      font-size:clamp(1.2rem,2vw,1.8rem);
-    }
-    .card-hearts.tl{top:28px;left:8px;} .card-hearts.br{bottom:28px;right:8px;transform:rotate(180deg);}
-    .card-frame img{
-      width:88%;height:78%;object-fit:cover;border-radius:6px;position:relative;z-index:1;cursor:pointer;
+    .card-frame {
+      width: clamp(140px, 14vw, 200px);
+      height: clamp(210px, 21vw, 300px);
+      border-radius: 12px;
+      position: relative;
+      flex-shrink: 0;
+      background: #fff;
+      border: 2px solid var(--navy);
+      box-shadow: 0 6px 30px rgba(7, 74, 135, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .hero-text{max-width:420px;padding-bottom:20px;}
-    .hero-text h1{
-      font-family:var(--heading);font-size:clamp(2.6rem,5.5vw,4.5rem);
-      line-height:1.05;color:var(--navy);margin-bottom:12px;
+    .card-frame::before,
+    .card-frame::after {
+      position: absolute;
+      font-family: var(--heading);
+      color: #c0392b;
+      z-index: 3;
+      line-height: 1;
     }
-    .hero-text .tagline{
-      font-family:var(--accent);font-style:italic;font-size:clamp(1rem,2.2vw,1.35rem);
-      color:var(--blue-mid);line-height:1.4;
+
+    .card-frame::before {
+      content: 'J\A♥';
+      white-space: pre;
+      top: 8px;
+      left: 10px;
+      font-size: clamp(0.7rem, 1.2vw, 1rem);
+      text-align: center;
+    }
+
+    .card-frame::after {
+      content: 'J\A♥';
+      white-space: pre;
+      bottom: 8px;
+      right: 10px;
+      font-size: clamp(0.7rem, 1.2vw, 1rem);
+      text-align: center;
+      transform: rotate(180deg);
+    }
+
+    .card-inner-border {
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(7, 74, 135, 0.15);
+      border-radius: 8px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .card-hearts {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      color: #c0392b;
+      opacity: 0.12;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+    }
+
+    .card-hearts.tl {
+      top: 28px;
+      left: 8px;
+    }
+
+    .card-hearts.br {
+      bottom: 28px;
+      right: 8px;
+      transform: rotate(180deg);
+    }
+
+    .card-frame img {
+      width: 88%;
+      height: 78%;
+      object-fit: cover;
+      border-radius: 6px;
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    .hero-text {
+      max-width: 420px;
+      padding-bottom: 20px;
+    }
+
+    .hero-text h1 {
+      font-family: var(--heading);
+      font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+      line-height: 1.05;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .hero-text .tagline {
+      font-family: var(--accent);
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--blue-mid);
+      line-height: 1.4;
     }
 
     /* ══════ FAN — full width ══════ */
-    .fan-stage{
-      position:absolute;bottom:0;right:0;width:100%;height:100%;
-      pointer-events:none;overflow:hidden;z-index:1;
+    .fan-stage {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
     }
-    .fan-pivot{
-      position:absolute;bottom:-5%;right:-2%;
+
+    .fan-pivot {
+      position: absolute;
+      bottom: -5%;
+      right: -2%;
     }
-    .fan-blade{
-      position:absolute;bottom:0;right:0;
-      width:clamp(500px,65vw,1100px);height:clamp(50px,5.5vw,80px);
-      border-radius:100px 0 0 100px / 50% 0 0 50%;
-      transform-origin:100% 50%;
-      opacity:0;
-      animation:fanOpenR 1.4s cubic-bezier(0.34,1.4,0.64,1) forwards;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 1px 4px rgba(7,74,135,0.08);
+
+    .fan-blade {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: clamp(500px, 65vw, 1100px);
+      height: clamp(50px, 5.5vw, 80px);
+      border-radius: 100px 0 0 100px / 50% 0 0 50%;
+      transform-origin: 100% 50%;
+      opacity: 0;
+      animation: fanOpenR 1.4s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 4px rgba(7, 74, 135, 0.08);
     }
-    .fan-blade::after{
-      content:'';position:absolute;inset:0;border-radius:inherit;
-      background:linear-gradient(270deg,rgba(255,255,255,0.2) 0%,transparent 50%);
+
+    .fan-blade::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(270deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
     }
+
     /* Rib line */
-    .fan-blade::before{
-      content:'';position:absolute;top:50%;right:10%;left:5%;height:1px;
-      background:rgba(255,255,255,0.15);transform:translateY(-50%);
+    .fan-blade::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      left: 5%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-50%);
     }
 
     /* 14 blades — dark to light */
-    .fan-blade:nth-child(1) {background:#042d54;animation-delay:.05s;--rot:2deg}
-    .fan-blade:nth-child(2) {background:#063d6e;animation-delay:.1s; --rot:11deg}
-    .fan-blade:nth-child(3) {background:var(--navy);animation-delay:.15s;--rot:20deg}
-    .fan-blade:nth-child(4) {background:#0d5a9c;animation-delay:.2s; --rot:29deg}
-    .fan-blade:nth-child(5) {background:var(--blue-dark);animation-delay:.25s;--rot:38deg}
-    .fan-blade:nth-child(6) {background:#2e78b5;animation-delay:.3s; --rot:47deg}
-    .fan-blade:nth-child(7) {background:var(--blue-mid);animation-delay:.35s;--rot:56deg}
-    .fan-blade:nth-child(8) {background:#65a3cf;animation-delay:.4s; --rot:65deg}
-    .fan-blade:nth-child(9) {background:var(--blue-light);animation-delay:.45s;--rot:74deg}
-    .fan-blade:nth-child(10){background:var(--blue-pale);animation-delay:.5s; --rot:83deg}
-    .fan-blade:nth-child(11){background:#a4d4f2;animation-delay:.55s;--rot:92deg}
-    .fan-blade:nth-child(12){background:#bde2f7;animation-delay:.6s; --rot:101deg}
-    .fan-blade:nth-child(13){background:#d4ecfa;animation-delay:.65s;--rot:110deg}
-    .fan-blade:nth-child(14){background:#e6f4fc;animation-delay:.7s; --rot:119deg}
-
-    @keyframes fanOpenR{
-      0%{transform:rotate(0deg);opacity:0}
-      15%{opacity:1}
-      100%{transform:rotate(var(--rot));opacity:1}
+    .fan-blade:nth-child(1) {
+      background: #042d54;
+      animation-delay: .05s;
+      --rot: 2deg
     }
-    .fan-rivet{
-      position:absolute;bottom:-4px;right:-4px;
-      width:22px;height:22px;border-radius:50%;z-index:10;
-      background:radial-gradient(circle,#d4b978 30%,#a08050 100%);
-      box-shadow:0 1px 6px rgba(0,0,0,0.25);
+
+    .fan-blade:nth-child(2) {
+      background: #063d6e;
+      animation-delay: .1s;
+      --rot: 11deg
+    }
+
+    .fan-blade:nth-child(3) {
+      background: var(--navy);
+      animation-delay: .15s;
+      --rot: 20deg
+    }
+
+    .fan-blade:nth-child(4) {
+      background: #0d5a9c;
+      animation-delay: .2s;
+      --rot: 29deg
+    }
+
+    .fan-blade:nth-child(5) {
+      background: var(--blue-dark);
+      animation-delay: .25s;
+      --rot: 38deg
+    }
+
+    .fan-blade:nth-child(6) {
+      background: #2e78b5;
+      animation-delay: .3s;
+      --rot: 47deg
+    }
+
+    .fan-blade:nth-child(7) {
+      background: var(--blue-mid);
+      animation-delay: .35s;
+      --rot: 56deg
+    }
+
+    .fan-blade:nth-child(8) {
+      background: #65a3cf;
+      animation-delay: .4s;
+      --rot: 65deg
+    }
+
+    .fan-blade:nth-child(9) {
+      background: var(--blue-light);
+      animation-delay: .45s;
+      --rot: 74deg
+    }
+
+    .fan-blade:nth-child(10) {
+      background: var(--blue-pale);
+      animation-delay: .5s;
+      --rot: 83deg
+    }
+
+    .fan-blade:nth-child(11) {
+      background: #a4d4f2;
+      animation-delay: .55s;
+      --rot: 92deg
+    }
+
+    .fan-blade:nth-child(12) {
+      background: #bde2f7;
+      animation-delay: .6s;
+      --rot: 101deg
+    }
+
+    .fan-blade:nth-child(13) {
+      background: #d4ecfa;
+      animation-delay: .65s;
+      --rot: 110deg
+    }
+
+    .fan-blade:nth-child(14) {
+      background: #e6f4fc;
+      animation-delay: .7s;
+      --rot: 119deg
+    }
+
+    @keyframes fanOpenR {
+      0% {
+        transform: rotate(0deg);
+        opacity: 0
+      }
+
+      15% {
+        opacity: 1
+      }
+
+      100% {
+        transform: rotate(var(--rot));
+        opacity: 1
+      }
+    }
+
+    .fan-rivet {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      z-index: 10;
+      background: radial-gradient(circle, #d4b978 30%, #a08050 100%);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
     }
 
     /* ══════ SECTIONS ══════ */
-    section{padding:clamp(60px,10vw,120px) clamp(24px,5vw,80px);max-width:1200px;margin:0 auto;}
-    .section-full{max-width:none;padding-left:0;padding-right:0;}
-    .section-heading{font-family:var(--heading);font-size:clamp(2rem,4vw,3rem);color:var(--navy);margin-bottom:8px;text-align:center;}
-    .section-sub{font-family:var(--accent);font-style:italic;font-size:1.1rem;color:var(--text-muted);margin-bottom:40px;text-align:center;}
-    .no-sub{margin-bottom:40px;}
+    section {
+      padding: clamp(60px, 10vw, 120px) clamp(24px, 5vw, 80px);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-    .bg-tint{background:linear-gradient(180deg,rgba(218,237,248,0.5) 0%,rgba(241,251,253,0.3) 100%);position:relative;z-index:1;}
+    .section-full {
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
 
-    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .section-divider{height:1px;max-width:200px;margin:0 auto;background:linear-gradient(90deg,transparent,var(--blue-pale),transparent)}
+    .section-heading {
+      font-family: var(--heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--navy);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .section-sub {
+      font-family: var(--accent);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .no-sub {
+      margin-bottom: 40px;
+    }
+
+    .bg-tint {
+      background: linear-gradient(180deg, rgba(218, 237, 248, 0.5) 0%, rgba(241, 251, 253, 0.3) 100%);
+      position: relative;
+      z-index: 1;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .section-divider {
+      height: 1px;
+      max-width: 200px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent, var(--blue-pale), transparent)
+    }
 
     /* ══════ ABOUT ══════ */
-    .about-grid{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;}
-    @media(max-width:768px){.about-grid{grid-template-columns:1fr;justify-items:center;text-align:center}}
-    .profile-photo-about{width:280px;height:280px;object-fit:cover;border-radius:50%;border:5px solid rgba(23,85,147,0.12);box-shadow:0 8px 30px rgba(7,74,135,0.12);cursor:pointer;}
-    .about-text p{font-size:1rem;line-height:1.75;color:var(--text-secondary);margin-bottom:16px}
-    .role-tag{display:inline-block;background:rgba(23,85,147,0.08);border-radius:999px;padding:8px 18px;margin:4px 4px 4px 0;font-size:0.88rem;color:var(--blue-dark);border:1px solid rgba(23,85,147,0.12)}
-    .dance-photos{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px}
-    .dance-photos img{height:200px;border-radius:12px;object-fit:cover;cursor:pointer;border:2px solid rgba(23,85,147,0.08);transition:transform 0.3s}
-    .dance-photos img:hover{transform:rotate(-1deg) scale(1.03)}
+    .about-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media(max-width:768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center
+      }
+    }
+
+    <!-- .profile-photo-about {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid rgba(23, 85, 147, 0.12);
+      box-shadow: 0 8px 30px rgba(7, 74, 135, 0.12);
+      cursor: pointer;
+    } -->
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: 16px
+    }
+
+    .role-tag {
+      display: inline-block;
+      background: rgba(23, 85, 147, 0.08);
+      border-radius: 999px;
+      padding: 8px 18px;
+      margin: 4px 4px 4px 0;
+      font-size: 0.88rem;
+      color: var(--blue-dark);
+      border: 1px solid rgba(23, 85, 147, 0.12)
+    }
+
+    .dance-photos {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 24px
+    }
+
+    .dance-photos img {
+      height: 200px;
+      border-radius: 12px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid rgba(23, 85, 147, 0.08);
+      transition: transform 0.3s
+    }
+
+    .dance-photos img:hover {
+      transform: rotate(-1deg) scale(1.03)
+    }
 
     /* ══════ EVENTS ══════ */
-    .event-project{background:rgba(255,255,255,0.5);border-radius:20px;padding:36px;margin-bottom:32px;border:1.5px solid rgba(23,85,147,0.06);transition:transform 0.3s,box-shadow 0.3s}
-    .event-project:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(7,74,135,0.06)}
-    .event-project h3{font-family:var(--heading);font-size:1.4rem;color:var(--navy);margin-bottom:2px}
-    .event-project .event-date{font-family:var(--accent);color:var(--text-muted);font-size:0.92rem;margin-bottom:18px}
-    .event-project .event-label{font-weight:700;font-size:0.75rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:16px 0 4px}
-    .event-project p{font-size:0.94rem;line-height:1.7;color:var(--text-secondary)}
-    .event-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:18px}
-    .event-photo-slot{aspect-ratio:16/10;border-radius:14px;border:2px dashed rgba(23,85,147,0.12);background:rgba(255,255,255,0.35);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:var(--text-muted);overflow:hidden}
-    .event-photo-slot img{width:100%;height:100%;object-fit:cover;border-radius:12px;cursor:pointer}
-    .flyer-section{margin-top:48px;padding-top:40px;border-top:1.5px dashed rgba(23,85,147,0.1)}
-    .flyer-section h3{font-family:var(--heading);font-size:1.4rem;color:var(--navy);margin-bottom:6px;text-align:center}
-    .flyer-grid{display:flex;gap:20px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin;justify-content:center;flex-wrap:wrap;}
-    .flyer-item{flex:0 0 auto;width:240px;border-radius:14px;border:2px solid rgba(23,85,147,0.06);background:rgba(255,255,255,0.4);overflow:hidden;transition:transform 0.3s}
-    .flyer-item:hover{transform:translateY(-3px)}
-    .flyer-item img{width:100%;height:auto;display:block;cursor:pointer}
+    .event-project {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 32px;
+      border: 1.5px solid rgba(23, 85, 147, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s
+    }
+
+    .event-project:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(7, 74, 135, 0.06)
+    }
+
+    .event-project h3 {
+      font-family: var(--heading);
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 2px
+    }
+
+    .event-project .event-date {
+      font-family: var(--accent);
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px
+    }
+
+    .event-project .event-label {
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 16px 0 4px
+    }
+
+    .event-project p {
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: var(--text-secondary)
+    }
+
+    .event-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+      margin-top: 18px
+    }
+
+    .event-photo-slot {
+      aspect-ratio: 16/10;
+      border-radius: 14px;
+      border: 2px dashed rgba(23, 85, 147, 0.12);
+      background: rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      overflow: hidden
+    }
+
+    .event-photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer
+    }
+
+    .flyer-section {
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1.5px dashed rgba(23, 85, 147, 0.1)
+    }
+
+    .flyer-section h3 {
+      font-family: var(--heading);
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+      text-align: center
+    }
+
+    .flyer-grid {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .flyer-item {
+      flex: 0 0 auto;
+      width: 240px;
+      border-radius: 14px;
+      border: 2px solid rgba(23, 85, 147, 0.06);
+      background: rgba(255, 255, 255, 0.4);
+      overflow: hidden;
+      transition: transform 0.3s
+    }
+
+    .flyer-item:hover {
+      transform: translateY(-3px)
+    }
+
+    .flyer-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer
+    }
 
     /* ══════ PROJECTS ══════ */
-    .project-card{background:rgba(255,255,255,0.55);border-radius:18px;padding:32px;margin-bottom:28px;border:1.5px solid rgba(23,85,147,0.06);transition:transform 0.3s,box-shadow 0.3s;backdrop-filter:blur(4px)}
-    .project-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(7,74,135,0.08)}
-    .project-card-grid{display:grid;grid-template-columns:260px 1fr;gap:32px;align-items:start}
-    @media(max-width:768px){.project-card-grid{grid-template-columns:1fr}}
-    .project-img{width:100%;border-radius:12px;border:2px solid rgba(23,85,147,0.06);cursor:pointer}
-    .project-card h3{font-family:var(--heading);font-size:1.35rem;margin-bottom:4px;color:var(--navy)}
-    .project-card .semester{font-family:var(--accent);color:var(--text-muted);font-size:0.95rem;margin-bottom:14px}
-    .project-card .detail-label{font-weight:700;font-size:0.75rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:14px 0 4px}
-    .project-card p{font-size:0.94rem;line-height:1.7;color:var(--text-secondary)}
-    .inspo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:14px}
-    .inspo-slot{aspect-ratio:4/3;border-radius:12px;border:2px dashed rgba(23,85,147,0.12);background:rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:var(--text-muted);overflow:hidden}
-    .inspo-slot img{width:100%;height:100%;object-fit:cover;border-radius:10px;cursor:pointer}
+    .project-card {
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 18px;
+      padding: 32px;
+      margin-bottom: 28px;
+      border: 1.5px solid rgba(23, 85, 147, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(4px)
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(7, 74, 135, 0.08)
+    }
+
+    .project-card-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 32px;
+      align-items: start
+    }
+
+    @media(max-width:768px) {
+      .project-card-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .project-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 2px solid rgba(23, 85, 147, 0.06);
+      cursor: pointer
+    }
+
+    .project-card h3 {
+      font-family: var(--heading);
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+      color: var(--navy)
+    }
+
+    .project-card .semester {
+      font-family: var(--accent);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 14px
+    }
+
+    .project-card .detail-label {
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 14px 0 4px
+    }
+
+    .project-card p {
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: var(--text-secondary)
+    }
+
+    .inspo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 14px
+    }
+
+    .inspo-slot {
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      border: 2px dashed rgba(23, 85, 147, 0.12);
+      background: rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      overflow: hidden
+    }
+
+    .inspo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer
+    }
 
     /* ══════ ART ══════ */
-    .art-project{background:rgba(255,255,255,0.45);border-radius:20px;padding:36px;margin-bottom:32px;border:1.5px solid rgba(23,85,147,0.06);transition:transform 0.3s,box-shadow 0.3s}
-    .art-project:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(7,74,135,0.06)}
-    .art-project h3{font-family:var(--heading);font-size:1.4rem;color:var(--navy);margin-bottom:2px}
-    .art-project .art-date{font-family:var(--accent);color:var(--text-muted);font-size:0.92rem;margin-bottom:18px}
-    .art-project .art-label{font-weight:700;font-size:0.75rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin:16px 0 4px}
-    .art-project p{font-size:0.94rem;line-height:1.7;color:var(--text-secondary)}
-    .art-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:18px}
-    .art-photo-slot{aspect-ratio:1;border-radius:14px;border:2px solid rgba(23,85,147,0.06);background:rgba(255,255,255,0.35);overflow:hidden}
-    .art-photo-slot img{width:100%;height:100%;object-fit:cover;border-radius:12px;cursor:pointer}
+    .art-project {
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 32px;
+      border: 1.5px solid rgba(23, 85, 147, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s
+    }
+
+    .art-project:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(7, 74, 135, 0.06)
+    }
+
+    .art-project h3 {
+      font-family: var(--heading);
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 2px
+    }
+
+    .art-project .art-date {
+      font-family: var(--accent);
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px
+    }
+
+    .art-project .art-label {
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 16px 0 4px
+    }
+
+    .art-project p {
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: var(--text-secondary)
+    }
+
+    .art-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 18px
+    }
+
+    .art-photo-slot {
+      aspect-ratio: 1;
+      border-radius: 14px;
+      border: 2px solid rgba(23, 85, 147, 0.06);
+      background: rgba(255, 255, 255, 0.35);
+      overflow: hidden
+    }
+
+    .art-photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer
+    }
 
     /* ══════ CONTACT ══════ */
-    .contact-footer{background:var(--navy);color:#fff;text-align:center;padding:clamp(60px,8vw,100px) 24px 40px;position:relative;z-index:1}
-    .contact-footer h2{font-family:var(--heading);font-size:clamp(2rem,4vw,3rem);margin-bottom:8px}
-    .contact-footer .sub{font-family:var(--accent);font-style:italic;color:var(--blue-pale);margin-bottom:40px;font-size:1.1rem}
-    .contact-links{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:48px}
-    .contact-links a,.contact-links span{color:#fff;text-decoration:none;font-size:1rem;display:flex;align-items:center;gap:10px;transition:color 0.2s}
-    .contact-links a:hover{color:var(--blue-pale)}
-    .contact-links .icon{font-size:1.3rem}
-    .art-credit{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.6;}
-    .art-credit .title-zh{font-size:0.85rem;color:rgba(255,255,255,0.5);display:block;margin-top:2px;}
-    .copyright{font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:20px}
-    .copyright a{color:rgba(255,255,255,0.45)}
+    .contact-footer {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: clamp(60px, 8vw, 100px) 24px 40px;
+      position: relative;
+      z-index: 1
+    }
+
+    .contact-footer h2 {
+      font-family: var(--heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 8px
+    }
+
+    .contact-footer .sub {
+      font-family: var(--accent);
+      font-style: italic;
+      color: var(--blue-pale);
+      margin-bottom: 40px;
+      font-size: 1.1rem
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 48px
+    }
+
+    .contact-links a,
+    .contact-links span {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s
+    }
+
+    .contact-links a:hover {
+      color: var(--blue-pale)
+    }
+
+    .contact-links .icon {
+      font-size: 1.3rem
+    }
+
+    .art-credit {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.6;
+    }
+
+    .art-credit .title-zh {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .copyright {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 20px
+    }
+
+    .copyright a {
+      color: rgba(255, 255, 255, 0.45)
+    }
 
     /* ══════ LIGHTBOX ══════ */
-    .lightbox-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(7,74,135,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out;padding:40px}
-    .lightbox-overlay.open{display:flex}
-    .lightbox-overlay img{max-width:90vw;max-height:88vh;border-radius:12px;box-shadow:0 12px 60px rgba(0,0,0,0.4);object-fit:contain;animation:lbZoom 0.25s ease-out}
-    .lightbox-close{position:fixed;top:22px;right:28px;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer;z-index:100000;opacity:0.8}
-    .lightbox-close:hover{opacity:1}
-    @keyframes lbZoom{from{transform:scale(0.92);opacity:0}to{transform:scale(1);opacity:1}}
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(7, 74, 135, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 40px
+    }
 
-    @media(max-width:700px){
-      .top-nav{gap:10px;padding:12px 14px} .top-nav a.nav-link{font-size:0.78rem}
-      .hero-inner{flex-direction:column;align-items:flex-start;padding:100px 24px 40px}
-      .hero-left{flex-direction:column;align-items:flex-start}
-      .card-frame{width:140px;height:210px}
-      .event-photo-grid{grid-template-columns:1fr} .flyer-item{width:180px}
+    .lightbox-overlay.open {
+      display: flex
+    }
+
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
+      object-fit: contain;
+      animation: lbZoom 0.25s ease-out
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 22px;
+      right: 28px;
+      font-size: 2rem;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 100000;
+      opacity: 0.8
+    }
+
+    .lightbox-close:hover {
+      opacity: 1
+    }
+
+    @keyframes lbZoom {
+      from {
+        transform: scale(0.92);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    @media(max-width:700px) {
+      .top-nav {
+        gap: 10px;
+        padding: 12px 14px
+      }
+
+      .top-nav a.nav-link {
+        font-size: 0.78rem
+      }
+
+      .hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 100px 24px 40px
+      }
+
+      .hero-left {
+        flex-direction: column;
+        align-items: flex-start
+      }
+
+      .card-frame {
+        width: 140px;
+        height: 210px
+      }
+
+      .event-photo-grid {
+        grid-template-columns: 1fr
+      }
+
+      .flyer-item {
+        width: 180px
+      }
     }
   </style>
 </head>
+
 <body>
 
-<div class="lightbox-overlay" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">&times;</button>
-  <img id="lightboxImg" src="" alt="Enlarged view">
-</div>
-
-<nav class="top-nav" id="topNav">
-  <a href="#hero" class="nav-name">Jenna Tumlos</a>
-  <a href="#about" class="nav-link">About Me</a>
-  <a href="#events" class="nav-link">Events</a>
-  <a href="#projects" class="nav-link">Projects</a>
-  <a href="#art" class="nav-link">Visual Artwork</a>
-  <a href="#contact" class="nav-link">Let's Chat!</a>
-</nav>
-
-<!-- ═══ HERO ═══ -->
-<section class="hero section-full" id="hero">
-  <div class="fan-stage">
-    <div class="fan-pivot">
-      <div class="fan-blade"></div><div class="fan-blade"></div><div class="fan-blade"></div>
-      <div class="fan-blade"></div><div class="fan-blade"></div><div class="fan-blade"></div>
-      <div class="fan-blade"></div><div class="fan-blade"></div><div class="fan-blade"></div>
-      <div class="fan-blade"></div><div class="fan-blade"></div><div class="fan-blade"></div>
-      <div class="fan-blade"></div><div class="fan-blade"></div>
-      <div class="fan-rivet"></div>
-    </div>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <img id="lightboxImg" src="" alt="Enlarged view">
   </div>
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="card-frame">
-        <div class="card-inner-border"></div>
-        <span class="card-hearts tl">♥</span>
-        <span class="card-hearts br">♥</span>
-        <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="lightbox-trigger">
-      </div>
-      <div class="hero-text">
-        <h1>Jenna<br>Tumlos</h1>
-        <p class="tagline">Atmosphere Curator &amp; Creative Problem Solver</p>
+
+  <nav class="top-nav" id="topNav">
+    <a href="#hero" class="nav-name">Jenna Tumlos</a>
+    <a href="#about" class="nav-link">About Me</a>
+    <a href="#events" class="nav-link">Events</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#art" class="nav-link">Visual Artwork</a>
+    <a href="#contact" class="nav-link">Let's Chat!</a>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero section-full" id="hero">
+    <div class="fan-stage">
+      <div class="fan-pivot">
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-blade"></div>
+        <div class="fan-rivet"></div>
       </div>
     </div>
-  </div>
-</section>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="card-frame">
+          <div class="card-inner-border"></div>
+          <span class="card-hearts tl">♥</span>
+          <span class="card-hearts br">♥</span>
+          <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="lightbox-trigger">
+        </div>
+        <div class="hero-text">
+          <h1>Jenna<br>Tumlos</h1>
+          <p class="tagline">Atmosphere Curator &amp; Creative Problem Solver</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ═══ ABOUT ME ═══ -->
-<div class="section-divider"></div>
-<section id="about" class="reveal">
-  <h2 class="section-heading no-sub">About Me</h2>
-  <div class="about-grid">
-    <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="profile-photo-about lightbox-trigger">
-    <div class="about-text">
+  <!-- ═══ ABOUT ME ═══ -->
+  <div class="section-divider"></div>
+  <section id="about" class="reveal">
+    <h2 class="section-heading no-sub">About Me</h2>
+    <div class="about-grid">
       <div class="about-text">
-        <p>Hi! My name is Jenna Tumlos. I'm an undergraduate student from the University of San Diego majoring in
-          Computer Science and minoring in Visual Arts. I'm passionate about promoting diversity and inclusion, building
-          community, and cultivating a culture of unity. I bring unique ideas to life through immersive storytelling,
-          blending the techniques of a sharp and visionary exhibition curator with the strategy and project management
-          of an event coordinator.</p>
-      
         <div class="about-text">
-          <p> After my four years in college, I'm evolving my career around creative innovation beyond the digital world of
-            coding and following my passion for curating lasting experiences that convey true meaning and builds personal
-            connections. I'm seeking entry-level positions where I can contribute creatively that need both artistic vision
-            and execution,
-            especially roles related to art curation, fashion, and event planning.</p>
-      <p style="margin-bottom:8px;font-weight:600;color:var(--navy);">Current Leadership Roles</p>
-      <div>
-        <span class="role-tag">Co-President — SASE, USD</span>
-        <span class="role-tag">President — ACM, USD</span>
-        <span class="role-tag">VP — Fashion Forward, USD</span>
-      </div>
-      <div class="dance-photos">
-        <img src="images/dance2.jpg" alt="Hawaiian Dance: Auana" class="lightbox-trigger">
-        <img src="images/dance1.jpg" alt="Filipino Cultural Dance" class="lightbox-trigger">
-      </div>
-    </div>
-  </div>
-</section>
+          <p>Hi! My name is Jenna Tumlos. I'm an undergraduate student from the University of San Diego majoring in
+            Computer Science and minoring in Visual Arts. I'm passionate about promoting diversity and inclusion,
+            building
+            community, and cultivating a culture of unity. I bring unique ideas to life through immersive storytelling,
+            blending the techniques of a sharp and visionary exhibition curator with the strategy and project management
+            of an event coordinator.</p>
 
-<!-- ═══ EVENTS ═══ -->
-<div class="bg-tint section-full">
-  <section id="events" class="reveal">
-    <h2 class="section-heading no-sub">Events</h2>
-
-    <div class="event-project reveal">
-      <h3>Sustainability Swap Meet</h3>
-      <p class="event-date">March 2026 · Fashion Forward</p>
-      <p class="event-label">Ideation &amp; Inspiration</p>
-      <p>One of the main reasons why Fashion Forward was created was to promote sustainability practices
-        within fashion and beyond. The swap meet was an event in collaboration with the USD Office of Sustainability
-        where students could sell their gently used clothing, accessories, and goods. The goal was to encourage
-        sustainable fashion practices, reduce textile waste on campus, and support student vendors.
-      </p>
-      <p class="event-label">Learning Outcome</p>
-      <p>From hosting previous events, this event in particular aligns the most with our purpose as an organization.
-        As a club focused on fashion, creativity and sustainability, we have a responsibility to promote sustainable
-        practices within the industry and encourage our members to be more conscious consumers. In planning this event,
-        it reminded me of the importance of aligning events with the core values and mission of the organization. The
-        entire day was so wholesome seeing everyone supporting each other through the swap meet, and it reinforced
-        the impact that our club can have in promoting positive change on campus.
-      </p>
-      <div class="event-photo-grid">
-        <div class="event-photo-slot"><img src="images/IMG_6674.jpeg" alt="Photo of eboard" class="lightbox-trigger"></div>
-        <div class="event-photo-slot"><img src="images/IMG_6631.jpeg" alt="Clothing rack" class="lightbox-trigger"></div>
-        <div class="event-photo-slot"><img src="images/IMG_6629.jpeg" alt="Wide angle" class="lightbox-trigger"></div>
-      </div>
-    </div>
-
-    <div class="event-project reveal">
-      <h3>Meet Your Cofounder</h3>
-      <p class="event-date">March 2026 · Association for Computing Machinery</p>
-      <p class="event-label">Ideation &amp; Inspiration</p>
-      <p>In collaboration with the Entrepreneurship club, I thought about the overlap between entrepreneurs
-        and developers and how we could create an event that would be beneficial for both communities. There has always been
-        this felt divide between people who have ideas and people who can help develop them. In reality,
-        it doesn't need to be that way, and there are so many people who have both the skills and the ideas but just haven't
-        found the right community to express both. I wanted to create a space for students to connect with the
-        chance to meet a partner for future projects or ventures.
-      </p>
-      <p class="event-label">Learning Outcome</p>
-      <p> Working with another organization, there was more hands to plan and execute the event, which made the process more
-        collaborative and smooth in production. I hope to host more events like this in the
-        future to continue fostering a sense of community, collaboration, and innovation on campus.
-      </p>
-      <div class="event-photo-grid">
-        <div class="event-photo-slot"><img src="images/IMG_6495.JPG" alt="Photo of eboard" class="lightbox-trigger"></div>
-        <div class="event-photo-slot"><img src="images/IMG_6496.JPG" alt="Photo of eboard" class="lightbox-trigger"></div>
-      </div>
-    </div>
-
-    <div class="event-project reveak">
-      <h3>Matcha and Moodboards</h3>
-      <p class="event-date">October 2025 · Fashion Forward</p>
-      <p class="event-label">Ideation &amp; Inspiration</p>
-      <p>Hosted the first creative community gathering on campus for all years and backgrounds. The goal of the event
-        was to create a safe space for students to connect over shared interests in fashion, creativity, and art.
-        We had a moodboard making activity with journals and art supplies, plus free matcha to encourage
-        fun conversation getting to know one another.</p>
-      </p>
-      <p class="event-label">Learning Outcome</p>
-      <p>Bringing an idea to life doesn't get better than this. Something we meerly spoke thoughts about together in a group
-        chat,
-        to actually bringing it to life was surreal. From the positive turnout and feedback, we knew the community was out
-        there
-        and just needed to be brought together. My goal is to host curated events like this, pockets of time in the day to
-        connect with
-        one another and try something new.</p>
-      <div class="event-photo-grid">
-        <div class="event-photo-slot"><img src="images/DSC01152.JPG" alt="Photo of eboard" class="lightbox-trigger"></div>
-        <div class="event-photo-slot"><img src="images/DSC01128.JPG" alt="Photo of moodboards" class="lightbox-trigger">
-        </div>
-        <div class="event-photo-slot"><img src="images/DSC01119.JPG" alt="Wide angle shot" class="lightbox-trigger"></div>
-      </div>
-    </div>
-
-    <div class="flyer-section">
-      <h3>Flyer Gallery</h3>
-      <p class="section-subheading">Event graphics I designed</p>
-      <div class="flyer-grid">
-        <div class="flyer-item"><img src="images/meet_cofounder.jpeg" alt="Event flyer 1" class="lightbox-trigger"></div>
-        <div class="flyer-item"><img src="images/raceforautism.png" alt="Event flyer 2" class="lightbox-trigger"></div>
-        <div class="flyer-item"><img src="images/4.png" alt="Event flyer 3" class="lightbox-trigger"></div>
-        <div class="flyer-item"><img src="images/5.png" alt="Event flyer 4" class="lightbox-trigger"></div>
-        <div class="flyer-item"><img src="images/3.png" alt="Event flyer 5" class="lightbox-trigger"></div>
-        <div class="flyer-item"><img src="images/sgt1.png" alt="Event flyer 6" class="lightbox-trigger"></div>
-        <div class="flyer-item"><img src="images/2.png" alt="Event flyer 7" class="lightbox-trigger"></div>
-        <div class="flyer-item"><img src="images/icecreamsocial.jpg" alt="Event flyer 8" class="lightbox-trigger"></div>
-      </div>
-    </div>
-    </div>
-
-<!-- ═══ PROJECTS ═══ -->
-<section id="projects" class="reveal">
-  <h2 class="section-heading">Projects</h2>
-  <p class="section-sub">Explore my work!</p>
-
-  <div class="project-card reveal">
-    <div class="project-card-grid">
-      <img src="images/SolarCenter_Start.png" alt="Solar Center App" class="project-img lightbox-trigger">
-      <div>
-        <h3>Solar Center</h3>
-        <p class="semester">Spring 2024 · Creative Algorithms</p>
-        <p class="detail-label">Description</p>
-        <p>SOLAR CENTER is a simple and personalizable meditation guide that aims to help balance hectic lifestyles with
-          mindfulness through breathwork and exercising creativity.</p>
-        <p class="detail-label">Motivation</p>
-        <p>As life grew busier than before, balancing so many responsibilities led me to forget the importance in self care and
-          taking breaks. I wanted to create a design/visual/process that could focus my attention at something almost
-          hypnotizing to relax hyper minds.</p>
-        <p class="detail-label">Inspiration</p>
-        <p>Seeing an 80s design of a pixelated horizon amidst finals season, I felt there was quite a peaceful tone to the
-          simplicity of the graphic. I thought the style could be an interesting take on a meditation guide, contrasting yet
-          oddly coinciding with the calming aspects of meditation.</p>
-        <p class="detail-label">Design &amp; Implementation</p>
-        <p>The app was built in Java using the Processing library. It features a dynamic horizon that expands and contracts with
-          the user's breath, a timer for meditation sessions, and customizable color schemes. I focused on creating smooth
-          animations and an intuitive interface to enhance the user experience.</p>
-        </div>
-        </div>
-        <p class="detail-label" style="margin-top:28px;">Inspiration &amp; Process</p>
-        <div class="inspo-grid">
-          <div class="inspo-slot"><img src="images/80s.png" alt="Inspiration graphic" class="lightbox-trigger"></div>
-          <div class="inspo-slot"><img src="images/image.png" alt="Inspiration graphic" class="lightbox-trigger"></div>
-          <div class="inspo-slot"><img src="images/sc_field.png" alt="Field screenshot" class="lightbox-trigger"></div>
-          <div class="inspo-slot"><img src="images/sc_breathein.png" alt="Breathe in screenshot" class="lightbox-trigger"></div>
-          <div class="inspo-slot"><img src="images/sc_holdbreath.png" alt="Hold breath screenshot" class="lightbox-trigger">
+          <div class="about-text">
+            <p> After my four years in college, I'm evolving my career around creative innovation beyond the digital
+              world of
+              coding and following my passion for curating lasting experiences that convey true meaning and builds
+              personal
+              connections. I'm seeking entry-level positions where I can contribute creatively that need both artistic
+              vision
+              and execution,
+              especially roles related to art curation, fashion, and event planning.</p>
+            <p style="margin-bottom:8px;font-weight:600;color:var(--navy);">Current Leadership Roles</p>
+            <div>
+              <span class="role-tag">Co-President — SASE, USD</span>
+              <span class="role-tag">President — ACM, USD</span>
+              <span class="role-tag">VP — Fashion Forward, USD</span>
+            </div>
+            <div class="dance-photos">
+              <img src="images/dance2.jpg" alt="Hawaiian Dance: Auana" class="lightbox-trigger">
+              <img src="images/dance1.jpg" alt="Filipino Cultural Dance" class="lightbox-trigger">
+            </div>
           </div>
-          <div class="inspo-slot"><img src="images/beatheout.png" alt="Breathe out screenshot" class="lightbox-trigger"></div>
-    </div>
+        </div>
+  </section>
+
+  <!-- ═══ EVENTS ═══ -->
+  <div class="bg-tint section-full">
+    <section id="events" class="reveal">
+      <h2 class="section-heading no-sub">Events</h2>
+
+      <div class="event-project reveal">
+        <h3>Sustainability Swap Meet</h3>
+        <p class="event-date">March 2026 · Fashion Forward</p>
+        <p class="event-label">Ideation &amp; Inspiration</p>
+        <p>One of the main reasons why Fashion Forward was created was to promote sustainability practices
+          within fashion and beyond. The swap meet was an event in collaboration with the USD Office of Sustainability
+          where students could sell their gently used clothing, accessories, and goods. The goal was to encourage
+          sustainable fashion practices, reduce textile waste on campus, and support student vendors.
+        </p>
+        <p class="event-label">Learning Outcome</p>
+        <p>From hosting previous events, this event in particular aligns the most with our purpose as an organization.
+          As a club focused on fashion, creativity and sustainability, we have a responsibility to promote sustainable
+          practices within the industry and encourage our members to be more conscious consumers. In planning this
+          event,
+          it reminded me of the importance of aligning events with the core values and mission of the organization. The
+          entire day was so wholesome seeing everyone supporting each other through the swap meet, and it reinforced
+          the impact that our club can have in promoting positive change on campus.
+        </p>
+        <div class="event-photo-grid">
+          <div class="event-photo-slot"><img src="images/IMG_6674.jpeg" alt="Photo of eboard" class="lightbox-trigger">
+          </div>
+          <div class="event-photo-slot"><img src="images/IMG_6631.jpeg" alt="Clothing rack" class="lightbox-trigger">
+          </div>
+          <div class="event-photo-slot"><img src="images/IMG_6629.jpeg" alt="Wide angle" class="lightbox-trigger"></div>
+        </div>
+      </div>
+
+      <div class="event-project reveal">
+        <h3>Meet Your Cofounder</h3>
+        <p class="event-date">March 2026 · Association for Computing Machinery</p>
+        <p class="event-label">Ideation &amp; Inspiration</p>
+        <p>In collaboration with the Entrepreneurship club, I thought about the overlap between entrepreneurs
+          and developers and how we could create an event that would be beneficial for both communities. There has
+          always been
+          this felt divide between people who have ideas and people who can help develop them. In reality,
+          it doesn't need to be that way, and there are so many people who have both the skills and the ideas but just
+          haven't
+          found the right community to express both. I wanted to create a space for students to connect with the
+          chance to meet a partner for future projects or ventures.
+        </p>
+        <p class="event-label">Learning Outcome</p>
+        <p> Working with another organization, there was more hands to plan and execute the event, which made the
+          process more
+          collaborative and smooth in production. I hope to host more events like this in the
+          future to continue fostering a sense of community, collaboration, and innovation on campus.
+        </p>
+        <div class="event-photo-grid">
+          <div class="event-photo-slot"><img src="images/IMG_6495.JPG" alt="Photo of eboard" class="lightbox-trigger">
+          </div>
+          <div class="event-photo-slot"><img src="images/IMG_6496.JPG" alt="Photo of eboard" class="lightbox-trigger">
+          </div>
+        </div>
+      </div>
+
+      <div class="event-project reveak">
+        <h3>Matcha and Moodboards</h3>
+        <p class="event-date">October 2025 · Fashion Forward</p>
+        <p class="event-label">Ideation &amp; Inspiration</p>
+        <p>Hosted the first creative community gathering on campus for all years and backgrounds. The goal of the event
+          was to create a safe space for students to connect over shared interests in fashion, creativity, and art.
+          We had a moodboard making activity with journals and art supplies, plus free matcha to encourage
+          fun conversation getting to know one another.</p>
+        </p>
+        <p class="event-label">Learning Outcome</p>
+        <p>Bringing an idea to life doesn't get better than this. Something we meerly spoke thoughts about together in a
+          group
+          chat,
+          to actually bringing it to life was surreal. From the positive turnout and feedback, we knew the community was
+          out
+          there
+          and just needed to be brought together. My goal is to host curated events like this, pockets of time in the
+          day to
+          connect with
+          one another and try something new.</p>
+        <div class="event-photo-grid">
+          <div class="event-photo-slot"><img src="images/DSC01152.JPG" alt="Photo of eboard" class="lightbox-trigger">
+          </div>
+          <div class="event-photo-slot"><img src="images/DSC01128.JPG" alt="Photo of moodboards"
+              class="lightbox-trigger">
+          </div>
+          <div class="event-photo-slot"><img src="images/DSC01119.JPG" alt="Wide angle shot" class="lightbox-trigger">
+          </div>
+        </div>
+      </div>
+
+      <div class="flyer-section">
+        <h3>Flyer Gallery</h3>
+        <p class="section-subheading">Event graphics I designed</p>
+        <div class="flyer-grid">
+          <div class="flyer-item"><img src="images/meet_cofounder.jpeg" alt="Event flyer 1" class="lightbox-trigger">
+          </div>
+          <div class="flyer-item"><img src="images/raceforautism.png" alt="Event flyer 2" class="lightbox-trigger">
+          </div>
+          <div class="flyer-item"><img src="images/4.png" alt="Event flyer 3" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/5.png" alt="Event flyer 4" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/3.png" alt="Event flyer 5" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/sgt1.png" alt="Event flyer 6" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/2.png" alt="Event flyer 7" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/icecreamsocial.jpg" alt="Event flyer 8" class="lightbox-trigger">
+          </div>
+        </div>
+      </div>
   </div>
 
-  <div class="section-divider" style="margin:48px auto"></div>
+  <!-- ═══ PROJECTS ═══ -->
+  <section id="projects" class="reveal">
+    <h2 class="section-heading">Projects</h2>
+    <p class="section-sub">Explore my work!</p>
 
-  <div class="project-card reveal">
-    <div class="project-card-grid">
-      <img src="images/timely_demo.png" alt="Timely App" class="project-img lightbox-trigger">
-      <div>
-        <h3>Timely App</h3>
-        <p class="semester">Spring 2025 · Object Oriented Programming</p>
-        <p class="detail-label">Description</p>
-        <p>Interactive planner with calendar view, to-do list, and a progress chart that visualizes task completion in real time.</p>
-        <p class="detail-label">Implementation</p>
-        <p>Follows MVC with Observer and Facade patterns. I built the To Do List, Progress Chart, and led the code cleanup.</p>
+    <div class="project-card reveal">
+      <div class="project-card-grid">
+        <img src="images/SolarCenter_Start.png" alt="Solar Center App" class="project-img lightbox-trigger">
+        <div>
+          <h3>Solar Center</h3>
+          <p class="semester">Spring 2024 · Creative Algorithms</p>
+          <p class="detail-label">Description</p>
+          <p>SOLAR CENTER is a simple and personalizable meditation guide that aims to help balance hectic lifestyles
+            with
+            mindfulness through breathwork and exercising creativity.</p>
+          <p class="detail-label">Motivation</p>
+          <p>As life grew busier than before, balancing so many responsibilities led me to forget the importance in self
+            care and
+            taking breaks. I wanted to create a design/visual/process that could focus my attention at something almost
+            hypnotizing to relax hyper minds.</p>
+          <p class="detail-label">Inspiration</p>
+          <p>Seeing an 80s design of a pixelated horizon amidst finals season, I felt there was quite a peaceful tone to
+            the
+            simplicity of the graphic. I thought the style could be an interesting take on a meditation guide,
+            contrasting yet
+            oddly coinciding with the calming aspects of meditation.</p>
+          <p class="detail-label">Design &amp; Implementation</p>
+          <p>The app was built in Java using the Processing library. It features a dynamic horizon that expands and
+            contracts with
+            the user's breath, a timer for meditation sessions, and customizable color schemes. I focused on creating
+            smooth
+            animations and an intuitive interface to enhance the user experience.</p>
+        </div>
+      </div>
+      <p class="detail-label" style="margin-top:28px;">Inspiration &amp; Process</p>
+      <div class="inspo-grid">
+        <div class="inspo-slot"><img src="images/80s.png" alt="Inspiration graphic" class="lightbox-trigger"></div>
+        <div class="inspo-slot"><img src="images/image.png" alt="Inspiration graphic" class="lightbox-trigger"></div>
+        <div class="inspo-slot"><img src="images/sc_field.png" alt="Field screenshot" class="lightbox-trigger"></div>
+        <div class="inspo-slot"><img src="images/sc_breathein.png" alt="Breathe in screenshot" class="lightbox-trigger">
+        </div>
+        <div class="inspo-slot"><img src="images/sc_holdbreath.png" alt="Hold breath screenshot"
+            class="lightbox-trigger">
+        </div>
+        <div class="inspo-slot"><img src="images/beatheout.png" alt="Breathe out screenshot" class="lightbox-trigger">
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="project-card reveal">
-    <div class="project-card-grid">
-      <img src="images/elevator.jpeg" alt="Elevator Simulator" class="project-img lightbox-trigger">
-      <div>
-        <h3>Elevator Simulator</h3>
-        <p class="semester">Spring 2025 · Object Oriented Programming</p>
-        <p class="detail-label">Description</p>
-        <p>Simulator with different elevator types, each with unique behaviors and a scheduler to determine which elevator services each call.</p>
-        <p class="detail-label">Implementation</p>
-        <p>I implemented Express and Freight elevators, the Complex Scheduler, and contributed to the Simulator class — all with comprehensive tests.</p>
+    <div class="section-divider" style="margin:48px auto"></div>
+
+    <div class="project-card reveal">
+      <div class="project-card-grid">
+        <img src="images/timely_demo.png" alt="Timely App" class="project-img lightbox-trigger">
+        <div>
+          <h3>Timely App</h3>
+          <p class="semester">Spring 2025 · Object Oriented Programming</p>
+          <p class="detail-label">Description</p>
+          <p>Interactive planner with calendar view, to-do list, and a progress chart that visualizes task completion in
+            real time.</p>
+          <p class="detail-label">Implementation</p>
+          <p>Follows MVC with Observer and Facade patterns. I built the To Do List, Progress Chart, and led the code
+            cleanup.</p>
+        </div>
       </div>
     </div>
-  </div>
 
-</section>
+    <div class="project-card reveal">
+      <div class="project-card-grid">
+        <img src="images/elevator.jpeg" alt="Elevator Simulator" class="project-img lightbox-trigger">
+        <div>
+          <h3>Elevator Simulator</h3>
+          <p class="semester">Spring 2025 · Object Oriented Programming</p>
+          <p class="detail-label">Description</p>
+          <p>Simulator with different elevator types, each with unique behaviors and a scheduler to determine which
+            elevator services each call.</p>
+          <p class="detail-label">Implementation</p>
+          <p>I implemented Express and Freight elevators, the Complex Scheduler, and contributed to the Simulator class
+            — all with comprehensive tests.</p>
+        </div>
+      </div>
+    </div>
 
-<!-- ═══ VISUAL ARTWORK ═══ -->
-<div class="bg-tint section-full">
-  <section id="art" class="reveal">
-    <h2 class="section-heading no-sub">Visual Artwork</h2>
+  </section>
 
-    <div class="art-project stagger">
-      <h3>Mini Zine</h3>
-      <p class="art-date">December 2025 · Adobe InDesign</p>
-      <p class="art-label">Goal</p>
-      <p>Create a small book based on a chosen singular subject matter.</p>
-      <p class="art-label">Ideation &amp; Inspiration</p>
-      <p>I first began digging through magazines from Vogue and National Geographic, cutting and pasting bits and pieces
-        together. Walking on campus throughout the years, I've noticed so many butterflies in my path. Though they are
-        figurative symbols in stories and poems, butterflies can be physical symbols in our life as we grow older.
-        Throughout my
-        college career, everyone has told me college flies by in the blink of an eye and I never believed them.
-        Ending my last fall semester and beginning my final term forever, I finally understand what it all means. Thinking
-        about
-        all the butterflies that have flown past me in the recent years, they now remind me of time flying before I can
-        realize
-        it, and also reminds me to take a breath and live in the present.</p>
-      <p class="art-label">Learning Outcomes</p>
-      <p>Learning the history of typography, utilizing text hierarchies, refining my personal style & flare, and rekindling
-        a
-        creative mindset & passion for art. </p>
-      <p class="art-label">A Continuation of <i>Growth is a Process</i> by Rupi Kaur</p>
-      <p><i>You do not just wake up and become the butterfly,</i>
-        Though the ability to grow wings is all yours.
-    
-        Wings made of sweet cereal, loose leaves in hair,
-        Heated snowball fights, and falling down stairs.
-    
-        When you can't read without lenses and speak in past tenses,
-        Look down and see how far you've flown from the ground. </p>
+  <!-- ═══ VISUAL ARTWORK ═══ -->
+  <div class="bg-tint section-full">
+    <section id="art" class="reveal">
+      <h2 class="section-heading no-sub">Visual Artwork</h2>
+
+      <div class="art-project stagger">
+        <h3>Mini Zine</h3>
+        <p class="art-date">December 2025 · Adobe InDesign</p>
+        <p class="art-label">Goal</p>
+        <p>Create a small book based on a chosen singular subject matter.</p>
+        <p class="art-label">Ideation &amp; Inspiration</p>
+        <p>I first began digging through magazines from Vogue and National Geographic, cutting and pasting bits and
+          pieces
+          together. Walking on campus throughout the years, I've noticed so many butterflies in my path. Though they are
+          figurative symbols in stories and poems, butterflies can be physical symbols in our life as we grow older.
+          Throughout my
+          college career, everyone has told me college flies by in the blink of an eye and I never believed them.
+          Ending my last fall semester and beginning my final term forever, I finally understand what it all means.
+          Thinking
+          about
+          all the butterflies that have flown past me in the recent years, they now remind me of time flying before I
+          can
+          realize
+          it, and also reminds me to take a breath and live in the present.</p>
+        <p class="art-label">Learning Outcomes</p>
+        <p>Learning the history of typography, utilizing text hierarchies, refining my personal style & flare, and
+          rekindling
+          a
+          creative mindset & passion for art. </p>
+        <p class="art-label">A Continuation of <i>Growth is a Process</i> by Rupi Kaur</p>
+        <p><i>You do not just wake up and become the butterfly,</i>
+          Though the ability to grow wings is all yours.
+
+          Wings made of sweet cereal, loose leaves in hair,
+          Heated snowball fights, and falling down stairs.
+
+          When you can't read without lenses and speak in past tenses,
+          Look down and see how far you've flown from the ground. </p>
         <div class="flyer-grid">
           <div class="flyer-item"><img src="images/zine.jpg" alt="zine page 1" class="lightbox-trigger"></div>
           <div class="flyer-item"><img src="images/zine2.jpg" alt="zine page 2" class="lightbox-trigger"></div>
@@ -538,88 +1336,102 @@
           <div class="flyer-item"><img src="images/zine7.jpg" alt="zine page 7" class="lightbox-trigger"></div>
           <div class="flyer-item"><img src="images/zine8.jpg" alt="zine page 8" class="lightbox-trigger"></div>
         </div>
+      </div>
+
+      <div class="art-project reveal">
+        <h3>Untitled</h3>
+        <p class="art-date">March 2026 · Relief Reduction</p>
+        <p class="art-label">Ideation &amp; Inspiration</p>
+        <p>My grandmother told me a story of walking home in the Philippines as a child, passing a cave where she saw
+          the golden eyes of a tiger staring back. I wanted to imagine that moment of fear and curiosity.</p>
+        <p class="art-label">Learning Outcomes</p>
+        <p>My first relief reduction taught me to listen to the ink and the press. The process is unforgiving and
+          requires patience and meticulous attention to detail.</p>
+        <div class="art-photo-grid">
+          <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Relief 1" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Relief 2" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Relief 3" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Relief 4" class="lightbox-trigger"></div>
         </div>
-
-    <div class="art-project reveal">
-      <h3>Untitled</h3>
-      <p class="art-date">March 2026 · Relief Reduction</p>
-      <p class="art-label">Ideation &amp; Inspiration</p>
-      <p>My grandmother told me a story of walking home in the Philippines as a child, passing a cave where she saw the golden eyes of a tiger staring back. I wanted to imagine that moment of fear and curiosity.</p>
-      <p class="art-label">Learning Outcomes</p>
-      <p>My first relief reduction taught me to listen to the ink and the press. The process is unforgiving and requires patience and meticulous attention to detail.</p>
-      <div class="art-photo-grid">
-        <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Relief 1" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Relief 2" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Relief 3" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Relief 4" class="lightbox-trigger"></div>
       </div>
-    </div>
 
-    <div class="art-project reveal">
-      <h3>Conceptual Film Poster — "Eternal Sunshine of the Spotless Mind"</h3>
-      <p class="art-date">December 2025 · InDesign</p>
-      <p class="art-label">Ideation &amp; Inspiration</p>
-      <p>The film invokes mood switches from excitement to frustration and hope to devastation. To consider erasing someone dear from your memory is outrageous — I wanted to capture that emotional complexity in a single visual.</p>
-      <div class="art-photo-grid">
-        <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Poster 1" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Poster 2" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Poster 3" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Poster 4" class="lightbox-trigger"></div>
+      <div class="art-project reveal">
+        <h3>Conceptual Film Poster — "Eternal Sunshine of the Spotless Mind"</h3>
+        <p class="art-date">December 2025 · InDesign</p>
+        <p class="art-label">Ideation &amp; Inspiration</p>
+        <p>The film invokes mood switches from excitement to frustration and hope to devastation. To consider erasing
+          someone dear from your memory is outrageous — I wanted to capture that emotional complexity in a single
+          visual.</p>
+        <div class="art-photo-grid">
+          <div class="art-photo-slot"><img src="images/relief1.JPG" alt="Poster 1" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6733.JPG" alt="Poster 2" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6734.JPG" alt="Poster 3" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6735.JPG" alt="Poster 4" class="lightbox-trigger"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="art-project reveal">
-      <h3>Did You Eat Yet?</h3>
-      <p class="art-date">April 2025 · Altered Book</p>
-      <p class="art-label">Ideation &amp; Inspiration</p>
-      <p>"Did you eat yet?" is a masked expression of care in many Asian cultures. I explored food as love through the book "New American Cooking Methods and Definitions," reimagining its contents through my identity as an Asian American.</p>
-      <p class="art-label">Learning Outcomes</p>
-      <p>Bookmaking is precise and personal. The intention of colors, type fonts, and size all contribute to its larger truth. This class helped me appreciate the smallest details.</p>
-      <div class="art-photo-grid">
-        <div class="art-photo-slot"><img src="images/IMG_6736.JPG" alt="Book 1" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6737.jpg" alt="Book 2" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6739.jpg" alt="Book 3" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6740.jpg" alt="Book 4" class="lightbox-trigger"></div>
-        <div class="art-photo-slot"><img src="images/IMG_6744.jpg" alt="Book 5" class="lightbox-trigger"></div>
+      <div class="art-project reveal">
+        <h3>Did You Eat Yet?</h3>
+        <p class="art-date">April 2025 · Altered Book</p>
+        <p class="art-label">Ideation &amp; Inspiration</p>
+        <p>"Did you eat yet?" is a masked expression of care in many Asian cultures. I explored food as love through the
+          book "New American Cooking Methods and Definitions," reimagining its contents through my identity as an Asian
+          American.</p>
+        <p class="art-label">Learning Outcomes</p>
+        <p>Bookmaking is precise and personal. The intention of colors, type fonts, and size all contribute to its
+          larger truth. This class helped me appreciate the smallest details.</p>
+        <div class="art-photo-grid">
+          <div class="art-photo-slot"><img src="images/IMG_6736.JPG" alt="Book 1" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6737.jpg" alt="Book 2" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6739.jpg" alt="Book 3" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6740.jpg" alt="Book 4" class="lightbox-trigger"></div>
+          <div class="art-photo-slot"><img src="images/IMG_6744.jpg" alt="Book 5" class="lightbox-trigger"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="art-project reveal">
-      <h3>CS Department Sticker Competition</h3>
-      <p class="art-date">2024 · Digital</p>
-      <p class="art-label">Ideation &amp; Inspiration</p>
-      <p>Created from frustration and silliness — that feeling of pressing run and hoping something new happens. It won the annual sticker competition, and it felt great knowing other students related.</p>
-      <div class="art-photo-grid">
-        <div class="art-photo-slot"><img src="images/cs_sticker.png" alt="Sticker design" class="lightbox-trigger"></div>
+      <div class="art-project reveal">
+        <h3>CS Department Sticker Competition</h3>
+        <p class="art-date">2024 · Digital</p>
+        <p class="art-label">Ideation &amp; Inspiration</p>
+        <p>Created from frustration and silliness — that feeling of pressing run and hoping something new happens. It
+          won the annual sticker competition, and it felt great knowing other students related.</p>
+        <div class="art-photo-grid">
+          <div class="art-photo-slot"><img src="images/cs_sticker.png" alt="Sticker design" class="lightbox-trigger">
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-</div>
-
-<!-- ═══ LET'S CHAT! ═══ -->
-<footer class="contact-footer" id="contact">
-  <h2>Let's Chat!</h2>
-  <p class="sub">I'd love to hear from you</p>
-  <div class="contact-links">
-    <span><span class="icon">✉️</span> jtumlos@sandiego.edu</span>
-    <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener"><span class="icon">💼</span> LinkedIn</a>
-  <div class="copyright">
-    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Jenna Tumlos. All rights reserved | Built on a template by <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a></p>
+    </section>
   </div>
-</footer>
 
-<script>
-  const nav=document.getElementById('topNav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
-  const reveals=document.querySelectorAll('.reveal');
-  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
-  reveals.forEach(el=>obs.observe(el));
-  const overlay=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');
-  document.addEventListener('click',e=>{const t=e.target.closest('.lightbox-trigger');if(t&&t.tagName==='IMG'){lbImg.src=t.src;lbImg.alt=t.alt;overlay.classList.add('open');document.body.style.overflow='hidden'}});
-  function closeLB(){overlay.classList.remove('open');document.body.style.overflow='';lbImg.src=''}
-  document.getElementById('lightboxClose').addEventListener('click',closeLB);
-  overlay.addEventListener('click',e=>{if(e.target===overlay)closeLB()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
-</script>
+  <!-- ═══ LET'S CHAT! ═══ -->
+  <footer class="contact-footer" id="contact">
+    <h2>Let's Chat!</h2>
+    <p class="sub">I'd love to hear from you</p>
+    <div class="contact-links">
+      <span><span class="icon">✉️</span> jenna.tumlos@gmail.com</span>
+      <a href="https://www.linkedin.com/in/jenna-therese-tumlos/" target="_blank" rel="noopener"><span
+          class="icon">💼</span> LinkedIn</a>
+      <div class="copyright">
+        <p>Copyright &copy;
+          <script>document.write(new Date().getFullYear());</script> Jenna Tumlos. All rights reserved | Built on a
+          template by <a href="https://colorlib.com" target="_blank" rel="noopener">Colorlib</a>
+        </p>
+      </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('topNav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40) });
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+    const overlay = document.getElementById('lightbox'), lbImg = document.getElementById('lightboxImg');
+    document.addEventListener('click', e => { const t = e.target.closest('.lightbox-trigger'); if (t && t.tagName === 'IMG') { lbImg.src = t.src; lbImg.alt = t.alt; overlay.classList.add('open'); document.body.style.overflow = 'hidden' } });
+    function closeLB() { overlay.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = '' }
+    document.getElementById('lightboxClose').addEventListener('click', closeLB);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeLB() });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB() });
+  </script>
 </body>
+
 </html>
