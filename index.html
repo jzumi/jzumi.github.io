@@ -659,6 +659,23 @@
       overflow: hidden;
       transition: transform 0.3s
     }
+    .flyer-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+.flyer-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: marqueeScroll 30s linear infinite;
+}
+.flyer-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
     .flyer-item:hover {
       transform: translateY(-3px)
@@ -1183,22 +1200,31 @@
         </div>
       </div>
 
-      <div class="flyer-section">
-        <h3>Flyer Gallery</h3>
-        <p class="section-subheading">Event graphics I designed</p>
-        <div class="flyer-grid">
-          <div class="flyer-item"><img src="images/meet_cofounder.jpeg" alt="Event flyer 1" class="lightbox-trigger">
-          </div>
-          <div class="flyer-item"><img src="images/raceforautism.png" alt="Event flyer 2" class="lightbox-trigger">
-          </div>
+      div class="flyer-section">
+      <h3>Flyer Gallery</h3>
+      <p class="section-sub">Event graphics I designed</p>
+      <div class="flyer-marquee">
+        <div class="flyer-track">
+          <!-- Original set -->
+          <div class="flyer-item"><img src="images/meet_cofounder.jpeg" alt="Event flyer 1" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/raceforautism.png" alt="Event flyer 2" class="lightbox-trigger"></div>
           <div class="flyer-item"><img src="images/4.png" alt="Event flyer 3" class="lightbox-trigger"></div>
           <div class="flyer-item"><img src="images/5.png" alt="Event flyer 4" class="lightbox-trigger"></div>
           <div class="flyer-item"><img src="images/3.png" alt="Event flyer 5" class="lightbox-trigger"></div>
           <div class="flyer-item"><img src="images/sgt1.png" alt="Event flyer 6" class="lightbox-trigger"></div>
           <div class="flyer-item"><img src="images/2.png" alt="Event flyer 7" class="lightbox-trigger"></div>
-          <div class="flyer-item"><img src="images/icecreamsocial.jpg" alt="Event flyer 8" class="lightbox-trigger">
-          </div>
+          <div class="flyer-item"><img src="images/icecreamsocial.jpg" alt="Event flyer 8" class="lightbox-trigger"></div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="flyer-item"><img src="images/meet_cofounder.jpeg" alt="Event flyer 1" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/raceforautism.png" alt="Event flyer 2" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/4.png" alt="Event flyer 3" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/5.png" alt="Event flyer 4" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/3.png" alt="Event flyer 5" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/sgt1.png" alt="Event flyer 6" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/2.png" alt="Event flyer 7" class="lightbox-trigger"></div>
+          <div class="flyer-item"><img src="images/icecreamsocial.jpg" alt="Event flyer 8" class="lightbox-trigger"></div>
         </div>
+      </div>
       </div>
   </div>
 
