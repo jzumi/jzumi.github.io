@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jenna Therese — Portfolio</title>
+  <link rel="stylesheet" href="https://use.typekit.net/fne1aqk.css">
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
     rel="stylesheet">
@@ -27,8 +28,8 @@
       --text-primary: #0a2e52;
       --text-secondary: #2a5a8a;
       --text-muted: #6a9cc8;
-      --heading: 'DM Serif Display', serif;
-      --body: 'Instrument Sans', sans-serif;
+      --heading: 'military-scribe', sans-serif;
+      --body: 'Cormorant Garamond', serif;
       --accent: 'Cormorant Garamond', serif;
     }
 
@@ -41,29 +42,6 @@
       color: var(--text-primary);
       background: var(--ice);
       overflow-x: hidden
-    }
-
-    /* Yuri background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background: url('images/yuri.jpg') center/cover no-repeat fixed;
-      opacity: 0.18;
-      pointer-events: none;
-    }
-
-    /* Grain */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 99998;
-      pointer-events: none;
-      opacity: 0.12;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      background-size: 180px;
     }
 
     /* All content above background */
@@ -1064,7 +1042,7 @@
           <span class="card-hearts br">♥</span>
           <img src="images/linkedin.JPG" alt="Jenna Tumlos" class="lightbox-trigger">
         </div>
-        <div class="hero__text">
+        <div class="hero_text">
           <h1>Jenna Tumlos</h1>
         </div>
       </div>
